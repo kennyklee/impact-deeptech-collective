@@ -5,672 +5,813 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Impact Deeptech Collective</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Anybody:wght@100;400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Azeret+Mono:wght@300;400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Newsreader:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Unbounded:wght@200;400;700;900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200;0,300;0,400;0,600;0,800;1,200;1,300;1,400&family=Bitter:ital,wght@0,300;0,400;0,700;0,900;1,400&family=Fira+Code:wght@300;400;500;700&family=Lora:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Epilogue:wght@100;300;400;500;700;900&family=Vollkorn:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Red+Hat+Display:wght@300;400;500;700;900&family=Archivo+Black&family=Climate+Crisis&display=swap');
 
-/* ── Reset ── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
 body{overflow-x:hidden;-webkit-font-smoothing:antialiased}
-a{color:inherit;text-decoration:none}
 
-/* ── Designs ── */
 .design{display:none;min-height:100vh}
-.design.active{display:block;animation:revealPage .6s cubic-bezier(.22,1,.36,1) both}
-@keyframes revealPage{from{opacity:0;filter:blur(4px)}to{opacity:1;filter:blur(0)}}
+.design.active{display:block}
 
 /* ── Switcher ── */
 .switcher{
-  position:fixed;bottom:28px;left:50%;transform:translateX(-50%);z-index:9999;
-  display:flex;align-items:center;gap:4px;
-  padding:5px;border-radius:99px;
-  background:rgba(18,18,20,.88);backdrop-filter:blur(24px) saturate(1.8);
-  border:1px solid rgba(255,255,255,.06);
-  box-shadow:0 12px 48px rgba(0,0,0,.5),0 0 0 1px rgba(0,0,0,.3);
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9999;
+  display:flex;align-items:center;gap:3px;padding:4px;border-radius:99px;
+  background:rgba(10,10,12,.92);backdrop-filter:blur(20px) saturate(1.6);
+  border:1px solid rgba(255,255,255,.07);
+  box-shadow:0 8px 40px rgba(0,0,0,.6);
 }
-.switcher button{
-  border:none;cursor:pointer;font-family:'Azeret Mono',monospace;
-  transition:all .2s cubic-bezier(.22,1,.36,1);outline:none;
-}
-.sw-btn{
-  width:40px;height:40px;border-radius:50%;
+.switcher button{border:none;cursor:pointer;outline:none;transition:all .22s ease}
+.sw-b{
+  width:42px;height:42px;border-radius:50%;
   display:inline-flex;align-items:center;justify-content:center;
-  font-size:13px;font-weight:400;color:rgba(255,255,255,.4);
-  background:transparent;
+  font-size:14px;font-weight:500;color:rgba(255,255,255,.35);
+  background:transparent;font-family:'Fira Code',monospace;
 }
-.sw-btn:hover{color:#fff;background:rgba(255,255,255,.08)}
-.sw-btn.on{color:#000;background:#fff;font-weight:700;box-shadow:0 2px 12px rgba(255,255,255,.15)}
-.sw-nav{
-  width:36px;height:36px;border-radius:50%;
+.sw-b:hover{color:rgba(255,255,255,.7);background:rgba(255,255,255,.06)}
+.sw-b.on{color:#000;background:#fff;font-weight:700}
+.sw-a{
+  width:34px;height:34px;border-radius:50%;
   display:inline-flex;align-items:center;justify-content:center;
-  font-size:18px;color:rgba(255,255,255,.3);background:transparent;
+  font-size:18px;color:rgba(255,255,255,.25);background:transparent;
 }
-.sw-nav:hover{color:#fff}
+.sw-a:hover{color:rgba(255,255,255,.7)}
 
-/* ══════════════════════════════════════════
-   1 — "PAPER" 
-   Warm newsprint. Asymmetric editorial.
-   Big dramatic serif. Intentional roughness.
-══════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════
+   1 — SPECIMEN
+   
+   Type specimen aesthetic. The typography IS 
+   the entire design. Giant display letters fill
+   the viewport. Exposed grid lines. Proof-sheet
+   energy. Ink-on-paper rawness.
+   
+   Differentiation: Enormous type at >200px that 
+   takes up physical space. Nothing else fights it.
+   
+   Fonts: Vollkorn (body) + Bitter (display — 
+   heavy slab with real character)
+   Color: Off-white paper + pure black + one 
+   rust-red specimen accent
+══════════════════════════════════════════════════ */
 .d1{
-  background:#f1ece3;color:#1c1917;
-  font-family:'Newsreader',Georgia,serif;
-  background-image:url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+  --paper:#f5f0e8;--ink:#141210;--red:#c0392b;--rule:rgba(20,18,16,.1);
+  background:var(--paper);color:var(--ink);
+  font-family:'Vollkorn',Georgia,serif;
+  background-image:url("data:image/svg+xml,%3Csvg width='300' height='300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='.035'/%3E%3C/svg%3E");
 }
-.d1 .mast{
-  padding:40px 6vw;display:flex;justify-content:space-between;align-items:baseline;
-  border-bottom:2px solid #1c1917;
+.d1 .spec-head{
+  padding:20px 5vw;display:flex;justify-content:space-between;align-items:baseline;
+  border-bottom:1px solid var(--rule);font-size:11px;letter-spacing:.15em;
+  text-transform:uppercase;color:rgba(20,18,16,.4);
 }
-.d1 .mast-title{font-family:'Instrument Serif',serif;font-size:15px;letter-spacing:.02em}
-.d1 .mast-date{font-size:12px;color:#8a8078;letter-spacing:.06em;text-transform:uppercase}
-.d1 .hero-ed{
-  padding:80px 6vw 60px;
-  display:grid;grid-template-columns:1.4fr .6fr;gap:60px;align-items:end;
+.d1 .giant{
+  padding:4vh 5vw 2vh;overflow:hidden;
 }
-.d1 .hero-ed h1{
-  font-family:'Instrument Serif',serif;font-weight:400;
-  font-size:clamp(52px,9vw,120px);line-height:.92;
-  letter-spacing:-.03em;
+.d1 .giant h1{
+  font-family:'Bitter',serif;font-weight:900;
+  font-size:clamp(64px,14vw,220px);line-height:.85;
+  letter-spacing:-.04em;
+  animation:specReveal .8s cubic-bezier(.16,1,.3,1) both;
 }
-.d1 .hero-ed h1 em{font-style:italic;color:#a0522d}
-.d1 .hero-ed .aside{
-  font-size:16px;line-height:1.75;color:#5c554c;
-  border-left:1px solid #c4bdb3;padding-left:24px;
+.d1 .giant h1 .r{color:var(--red)}
+@keyframes specReveal{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+.d1 .giant .note{
+  margin-top:24px;font-size:15px;line-height:1.8;color:rgba(20,18,16,.5);
+  max-width:480px;font-style:italic;
+  animation:specReveal .8s cubic-bezier(.16,1,.3,1) .15s both;
 }
-.d1 .rule{height:1px;background:#1c1917;margin:0 6vw}
-.d1 .rule.thin{background:#c4bdb3}
-.d1 .cols{
-  padding:48px 6vw;
-  display:grid;grid-template-columns:repeat(4,1fr);gap:32px;
+.d1 .spec-rule{height:1px;background:var(--ink);margin:0 5vw}
+.d1 .spec-rule.light{background:var(--rule)}
+.d1 .spec-cols{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-bottom:1px solid var(--rule);
 }
-.d1 .person{text-align:center;padding:40px 12px}
-.d1 .person .ini{
-  font-family:'Instrument Serif',serif;font-size:56px;line-height:1;
-  color:#a0522d;margin-bottom:8px;
+.d1 .spec-person{
+  padding:56px 24px;text-align:center;
+  border-right:1px solid var(--rule);
+  animation:specReveal .6s cubic-bezier(.16,1,.3,1) both;
 }
-.d1 .person .nm{font-weight:600;font-size:18px;margin-bottom:2px}
-.d1 .person .rl{font-size:13px;color:#8a8078;font-style:italic}
-.d1 .manifesto{
-  padding:60px 6vw;
-  display:grid;grid-template-columns:.4fr .6fr;gap:48px;
+.d1 .spec-person:nth-child(1){animation-delay:.1s}
+.d1 .spec-person:nth-child(2){animation-delay:.18s}
+.d1 .spec-person:nth-child(3){animation-delay:.26s}
+.d1 .spec-person:nth-child(4){animation-delay:.34s;border-right:none}
+.d1 .spec-person .letter{
+  font-family:'Bitter',serif;font-weight:900;font-size:72px;
+  line-height:1;color:var(--red);margin-bottom:12px;
 }
-.d1 .manifesto h2{
-  font-family:'Instrument Serif',serif;font-size:clamp(28px,4vw,48px);
-  font-weight:400;line-height:1.1;
+.d1 .spec-person .nm{font-weight:700;font-size:20px;margin-bottom:2px}
+.d1 .spec-person .cap{font-size:12px;color:rgba(20,18,16,.4);font-style:italic;letter-spacing:.04em}
+.d1 .spec-text{
+  display:grid;grid-template-columns:.35fr .65fr;
+  padding:56px 5vw;gap:40px;
 }
-.d1 .manifesto .body{
-  column-count:2;column-gap:32px;
-  font-size:15px;line-height:1.85;color:#3d3832;
+.d1 .spec-text h2{
+  font-family:'Bitter',serif;font-size:clamp(22px,3.5vw,40px);
+  font-weight:900;line-height:1.1;
 }
-.d1 .foot{
-  padding:48px 6vw;border-top:2px solid #1c1917;
+.d1 .spec-text .body{
+  column-count:2;column-gap:28px;font-size:15px;line-height:1.9;color:rgba(20,18,16,.6);
+}
+.d1 .spec-foot{
+  padding:28px 5vw;border-top:1px solid var(--ink);
   display:flex;justify-content:space-between;align-items:center;
 }
-.d1 .foot a.link{
-  font-family:'Instrument Serif',serif;font-size:18px;
-  border-bottom:1px solid #1c1917;padding-bottom:2px;
+.d1 .spec-foot a{
+  font-family:'Bitter',serif;font-weight:700;
+  border-bottom:2px solid var(--red);padding-bottom:4px;
+  color:var(--ink);text-decoration:none;font-size:16px;
   transition:color .2s;
 }
-.d1 .foot a.link:hover{color:#a0522d}
+.d1 .spec-foot a:hover{color:var(--red)}
 @media(max-width:800px){
-  .d1 .hero-ed{grid-template-columns:1fr;gap:32px}
-  .d1 .cols{grid-template-columns:repeat(2,1fr)}
-  .d1 .manifesto{grid-template-columns:1fr}
-  .d1 .manifesto .body{column-count:1}
+  .d1 .spec-cols{grid-template-columns:repeat(2,1fr)}
+  .d1 .spec-person:nth-child(2){border-right:none}
+  .d1 .spec-text{grid-template-columns:1fr}
+  .d1 .spec-text .body{column-count:1}
 }
 
-/* ══════════════════════════════════════════
-   2 — "SIGNAL"
-   Dense data aesthetic. Monospace. 
-   Neon chartreuse on near-black.
-   Grid of tight info blocks.
-══════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════
+   2 — TERRAIN
+   
+   Topographic / cartographic. Mapping new territory.
+   SVG contour lines as background texture. 
+   Earth tones — ochre, umber, sandstone.
+   
+   Differentiation: Animated SVG topo contour lines
+   that slowly shift. Feels like charting the unknown.
+   
+   Fonts: Red Hat Display (geometric humanist, feels
+   like modern cartographic labels) + Lora (body)
+   Color: Deep umber bg + warm sand text + ochre accent
+══════════════════════════════════════════════════ */
 .d2{
-  background:#0e100e;color:#c8d6c0;
-  font-family:'Azeret Mono',monospace;
-  font-size:13px;line-height:1.6;
+  --earth:#1a1610;--sand:#d4c5a9;--ochre:#c8923c;--line:rgba(200,146,60,.12);
+  background:var(--earth);color:var(--sand);
+  font-family:'Lora',Georgia,serif;position:relative;
 }
-.d2 .bar{
-  padding:16px 5vw;display:flex;justify-content:space-between;align-items:center;
-  border-bottom:1px solid #1e241e;
+.d2 .topo-bg{
+  position:fixed;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:0;
+  opacity:.5;
 }
-.d2 .bar .logo{color:#d1ff73;font-weight:900;font-size:11px;letter-spacing:.15em;text-transform:uppercase}
-.d2 .bar .meta{color:#4a5548;font-size:11px}
-.d2 .splash{
-  padding:100px 5vw 80px;
-  position:relative;overflow:hidden;
+.d2 .topo-bg svg{width:100%;height:100%}
+.d2 .inner2{position:relative;z-index:1}
+.d2 .wrap2{width:min(1100px,90%);margin:0 auto}
+.d2 .nav2{
+  padding:28px 0;display:flex;justify-content:space-between;align-items:center;
+  border-bottom:1px solid var(--line);
 }
-.d2 .splash::after{
-  content:'IDC';position:absolute;right:-2vw;top:-30px;
-  font-family:'Unbounded',sans-serif;font-weight:900;
-  font-size:clamp(180px,28vw,380px);line-height:.85;
-  color:rgba(209,255,115,.04);pointer-events:none;
-  letter-spacing:-.04em;
+.d2 .nav2 .mark{
+  font-family:'Red Hat Display',sans-serif;font-weight:700;font-size:13px;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--ochre);
 }
-.d2 .splash h1{
-  font-family:'Unbounded',sans-serif;font-weight:900;
-  font-size:clamp(32px,5.5vw,64px);line-height:1;
-  color:#d1ff73;max-width:700px;position:relative;z-index:1;
-  margin-bottom:20px;letter-spacing:-.02em;
+.d2 .nav2 .coord{font-size:12px;color:rgba(212,197,169,.3);font-style:italic}
+.d2 .hero2{
+  padding:120px 0 80px;
+  display:grid;grid-template-columns:1.3fr .7fr;gap:60px;align-items:end;
 }
-.d2 .splash p{max-width:480px;color:#6b7a63;position:relative;z-index:1}
-.d2 .grid4{
-  display:grid;grid-template-columns:repeat(4,1fr);
-  border-top:1px solid #1e241e;
+.d2 .hero2 h1{
+  font-family:'Red Hat Display',sans-serif;font-weight:900;
+  font-size:clamp(40px,7vw,76px);line-height:.95;letter-spacing:-.02em;
+  color:#e8dcc8;
+  animation:terrainUp .7s cubic-bezier(.16,1,.3,1) both;
 }
-.d2 .cell{
-  padding:32px 5vw 32px 24px;
-  border-right:1px solid #1e241e;border-bottom:1px solid #1e241e;
-  transition:background .25s;
+.d2 .hero2 h1 .ochre{color:var(--ochre)}
+@keyframes terrainUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.d2 .hero2 .aside2{
+  border-left:1px solid var(--line);padding-left:24px;
+  font-size:16px;line-height:1.8;color:rgba(212,197,169,.5);
+  animation:terrainUp .7s cubic-bezier(.16,1,.3,1) .1s both;
 }
-.d2 .cell:nth-child(4n){border-right:none}
-.d2 .cell:hover{background:rgba(209,255,115,.03)}
-.d2 .cell .tag{color:#d1ff73;font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
-.d2 .cell .val{font-family:'Unbounded',sans-serif;font-size:28px;font-weight:700;color:#e8f0e0;margin-bottom:4px}
-.d2 .cell .desc{color:#4a5548;font-size:12px}
-.d2 .founders-strip{
-  display:grid;grid-template-columns:repeat(4,1fr);
-  border-top:1px solid #1e241e;
+.d2 .contour-divider{
+  height:1px;
+  background:repeating-linear-gradient(90deg,var(--ochre) 0,var(--ochre) 8px,transparent 8px,transparent 16px);
+  opacity:.25;margin:0;
 }
-.d2 .f-cell{
-  padding:40px 24px;text-align:center;
-  border-right:1px solid #1e241e;
-  transition:background .25s;
+.d2 .grid2{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--line);margin:60px 0;
+  animation:terrainUp .7s cubic-bezier(.16,1,.3,1) .2s both;
 }
-.d2 .f-cell:last-child{border-right:none}
-.d2 .f-cell:hover{background:rgba(209,255,115,.04)}
-.d2 .f-cell .code{
-  display:inline-block;width:48px;height:48px;line-height:48px;
-  border:1px solid #2a322a;color:#d1ff73;font-weight:900;font-size:18px;
-  margin-bottom:12px;
+.d2 .g2-card{
+  background:var(--earth);padding:48px 24px;text-align:center;
+  transition:background .3s;
 }
-.d2 .f-cell .nm{color:#e8f0e0;font-weight:700;font-size:14px;margin-bottom:2px}
-.d2 .f-cell .rl{color:#4a5548;font-size:11px}
-.d2 .block-text{
-  padding:60px 5vw;
-  display:grid;grid-template-columns:.35fr .65fr;gap:40px;
-  border-top:1px solid #1e241e;
+.d2 .g2-card:hover{background:rgba(200,146,60,.06)}
+.d2 .g2-card .sym{
+  font-family:'Red Hat Display',sans-serif;font-weight:900;
+  font-size:44px;color:var(--ochre);margin-bottom:12px;line-height:1;
 }
-.d2 .block-text h2{font-family:'Unbounded',sans-serif;font-size:20px;font-weight:700;color:#d1ff73}
-.d2 .block-text p{color:#6b7a63;font-size:13px;line-height:1.8}
+.d2 .g2-card .nm{font-weight:700;font-size:18px;color:#e8dcc8;margin-bottom:4px}
+.d2 .g2-card .rl{font-size:13px;color:rgba(212,197,169,.35);font-style:italic}
+.d2 .mission2{
+  padding:60px 0;
+  display:grid;grid-template-columns:.4fr .6fr;gap:48px;
+  border-top:1px solid var(--line);
+}
+.d2 .mission2 h2{
+  font-family:'Red Hat Display',sans-serif;font-weight:900;font-size:28px;
+  line-height:1.15;color:var(--ochre);
+}
+.d2 .mission2 p{font-size:16px;line-height:1.85;color:rgba(212,197,169,.5)}
+.d2 .expedition{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  background:var(--line);margin:40px 0;
+}
+.d2 .exp-card{
+  background:var(--earth);padding:36px 24px;
+}
+.d2 .exp-card .num{
+  font-family:'Red Hat Display',sans-serif;font-size:11px;font-weight:700;
+  letter-spacing:.15em;color:var(--ochre);margin-bottom:12px;
+}
+.d2 .exp-card h3{font-size:17px;font-weight:700;color:#e8dcc8;margin-bottom:8px}
+.d2 .exp-card p{font-size:14px;line-height:1.8;color:rgba(212,197,169,.4)}
 .d2 .foot2{
-  padding:24px 5vw;border-top:1px solid #1e241e;
+  padding:32px 0;border-top:1px solid var(--line);
   display:flex;justify-content:space-between;align-items:center;
 }
-.d2 .foot2 a{color:#d1ff73;border-bottom:1px solid #d1ff73;font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding-bottom:2px}
+.d2 .foot2 a{
+  font-family:'Red Hat Display',sans-serif;font-weight:700;font-size:14px;
+  color:var(--ochre);text-decoration:none;letter-spacing:.06em;
+  border-bottom:1px solid var(--ochre);padding-bottom:4px;
+  transition:opacity .2s;
+}
+.d2 .foot2 a:hover{opacity:.7}
 @media(max-width:800px){
-  .d2 .grid4,.d2 .founders-strip{grid-template-columns:repeat(2,1fr)}
-  .d2 .cell:nth-child(2n){border-right:none}
-  .d2 .f-cell:nth-child(2n){border-right:none}
-  .d2 .block-text{grid-template-columns:1fr}
+  .d2 .hero2{grid-template-columns:1fr}
+  .d2 .grid2,.d2 .expedition{grid-template-columns:repeat(2,1fr)}
+  .d2 .mission2{grid-template-columns:1fr}
 }
 
-/* ══════════════════════════════════════════
-   3 — "AURORA"  
-   Ethereal dark with organic color blobs.
-   Soft, rounded, airy. Humanist sans.
-══════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════
+   3 — DARKROOM
+   
+   Photography darkroom. Deep blacks. Red/amber 
+   safelight glow. Heavy grain overlay. Elements
+   that "develop" — fade in like a print appearing
+   in chemicals.
+   
+   Differentiation: Grain texture + staggered reveal
+   animations that genuinely feel like photo development.
+   
+   Fonts: Epilogue (clean geometric, like darkroom 
+   labels) + Crimson Pro (body serif)
+   Color: Near-black + deep darkroom red + amber
+══════════════════════════════════════════════════ */
 .d3{
-  background:#0b0d13;color:#d8dce8;
-  font-family:'Cormorant Garamond',Georgia,serif;
-  position:relative;
+  --dark:#0a0908;--red:#8b1a1a;--amber:#d4873f;--fog:rgba(212,135,63,.06);
+  background:var(--dark);color:#c8bfb0;
+  font-family:'Crimson Pro',Georgia,serif;position:relative;
 }
-.d3 .blobs{
-  position:fixed;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:0;
-  overflow:hidden;
+.d3::before{
+  content:'';position:fixed;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:0;
+  background:url("data:image/svg+xml,%3Csvg width='256' height='256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)' opacity='.08'/%3E%3C/svg%3E");
 }
-.d3 .blob{
-  position:absolute;border-radius:50%;filter:blur(100px);
-  animation:drift 20s ease-in-out infinite alternate;
+.d3::after{
+  content:'';position:fixed;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse at 30% 20%,rgba(139,26,26,.08),transparent 60%),
+             radial-gradient(ellipse at 80% 70%,rgba(212,135,63,.05),transparent 50%);
 }
-.d3 .blob.a{width:600px;height:600px;background:rgba(99,102,241,.15);top:-10%;left:-5%;animation-delay:0s}
-.d3 .blob.b{width:500px;height:500px;background:rgba(236,72,153,.12);bottom:10%;right:-5%;animation-delay:-7s}
-.d3 .blob.c{width:400px;height:400px;background:rgba(52,211,153,.1);top:40%;left:40%;animation-delay:-14s}
-@keyframes drift{
-  0%{transform:translate(0,0) scale(1)}
-  33%{transform:translate(30px,-40px) scale(1.05)}
-  66%{transform:translate(-20px,30px) scale(.95)}
-  100%{transform:translate(10px,-20px) scale(1.02)}
-}
-.d3 .inner{position:relative;z-index:1}
+.d3 .inner3{position:relative;z-index:1}
 .d3 .wrap3{width:min(1100px,90%);margin:0 auto}
-.d3 .hero3{
-  padding:140px 0 80px;text-align:center;
+.d3 .top3{
+  padding:28px 0;display:flex;justify-content:space-between;align-items:center;
+  border-bottom:1px solid rgba(200,191,176,.06);
 }
-.d3 .hero3 .over{
-  font-size:14px;letter-spacing:.25em;text-transform:uppercase;
-  color:rgba(216,220,232,.35);margin-bottom:32px;
-  font-family:'Cormorant Garamond',serif;font-weight:600;
+.d3 .top3 .mark{
+  font-family:'Epilogue',sans-serif;font-weight:700;font-size:12px;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--amber);
+}
+.d3 .top3 .exp{font-size:11px;color:rgba(200,191,176,.2);letter-spacing:.06em}
+.d3 .hero3{
+  padding:120px 0 80px;text-align:center;
 }
 .d3 .hero3 h1{
-  font-weight:300;font-size:clamp(44px,8vw,96px);line-height:1;
-  letter-spacing:-.02em;margin-bottom:28px;
+  font-family:'Epilogue',sans-serif;font-weight:900;
+  font-size:clamp(36px,7vw,80px);line-height:.95;
+  letter-spacing:-.03em;color:#e0d8c8;
+  animation:develop 1.8s cubic-bezier(.16,1,.3,1) both;
 }
-.d3 .hero3 h1 em{font-style:italic;color:#a5b4fc}
+.d3 .hero3 h1 .glow{
+  color:var(--amber);
+  text-shadow:0 0 40px rgba(212,135,63,.3);
+}
+@keyframes develop{
+  0%{opacity:0;filter:blur(8px) brightness(.3)}
+  40%{opacity:.6;filter:blur(2px) brightness(.7)}
+  100%{opacity:1;filter:blur(0) brightness(1)}
+}
 .d3 .hero3 p{
-  font-size:20px;color:rgba(216,220,232,.45);max-width:460px;margin:0 auto;
-  line-height:1.7;font-weight:300;
+  margin-top:28px;font-size:19px;line-height:1.75;
+  color:rgba(200,191,176,.4);max-width:520px;margin-left:auto;margin-right:auto;
+  font-weight:300;font-style:italic;
+  animation:develop 1.8s cubic-bezier(.16,1,.3,1) .3s both;
 }
-.d3 .orb-divider{
-  width:8px;height:8px;border-radius:50%;
-  background:rgba(165,180,252,.5);margin:60px auto;
-  box-shadow:0 0 30px rgba(165,180,252,.3);
+.d3 .amber-line{
+  height:1px;background:linear-gradient(90deg,transparent,rgba(212,135,63,.2),transparent);
+  margin:0 auto;width:120px;
 }
-.d3 .founders3{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:24px;
-  padding:0 0 80px;
+.d3 .contacts3{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:20px;
+  padding:64px 0;
 }
-.d3 .fc3{
-  text-align:center;padding:48px 20px;
-  border-radius:24px;
-  background:rgba(255,255,255,.03);
-  border:1px solid rgba(255,255,255,.06);
-  backdrop-filter:blur(12px);
-  transition:transform .4s cubic-bezier(.22,1,.36,1),border-color .4s;
+.d3 .cx3{
+  text-align:center;padding:48px 16px;
+  border:1px solid rgba(200,191,176,.05);border-radius:4px;
+  background:rgba(200,191,176,.02);
+  transition:border-color .4s,background .4s;
 }
-.d3 .fc3:hover{transform:translateY(-8px);border-color:rgba(165,180,252,.25)}
-.d3 .fc3 .ava{
-  width:72px;height:72px;border-radius:50%;margin:0 auto 20px;
-  background:linear-gradient(135deg,rgba(99,102,241,.3),rgba(236,72,153,.2));
-  display:flex;align-items:center;justify-content:center;
-  font-size:28px;font-weight:300;color:#d8dce8;
-  border:1px solid rgba(255,255,255,.1);
+.d3 .cx3:nth-child(1){animation:develop 1.4s ease .2s both}
+.d3 .cx3:nth-child(2){animation:develop 1.4s ease .35s both}
+.d3 .cx3:nth-child(3){animation:develop 1.4s ease .5s both}
+.d3 .cx3:nth-child(4){animation:develop 1.4s ease .65s both}
+.d3 .cx3:hover{border-color:rgba(212,135,63,.2);background:rgba(212,135,63,.04)}
+.d3 .cx3 .ini{
+  font-family:'Epilogue',sans-serif;font-weight:100;font-size:56px;
+  color:var(--amber);margin-bottom:12px;line-height:1;
+  text-shadow:0 0 30px rgba(212,135,63,.2);
 }
-.d3 .fc3 .nm{font-size:22px;font-weight:400;margin-bottom:4px;letter-spacing:.02em}
-.d3 .fc3 .rl{font-size:14px;color:rgba(216,220,232,.35);font-style:italic}
-.d3 .philosophy{
-  padding:80px 0;text-align:center;
+.d3 .cx3 .nm{font-size:18px;font-weight:600;color:#d8d0c0;margin-bottom:4px}
+.d3 .cx3 .rl{font-size:13px;color:rgba(200,191,176,.25);font-style:italic}
+.d3 .essay3{
+  padding:60px 0;display:grid;grid-template-columns:.45fr .55fr;gap:48px;
+  border-top:1px solid rgba(200,191,176,.06);
 }
-.d3 .philosophy blockquote{
-  font-size:clamp(24px,4vw,44px);font-weight:300;font-style:italic;
-  line-height:1.4;max-width:800px;margin:0 auto 40px;
-  color:rgba(216,220,232,.7);
+.d3 .essay3 h2{
+  font-family:'Epilogue',sans-serif;font-weight:900;font-size:28px;
+  line-height:1.15;color:var(--amber);
 }
-.d3 .philosophy .attr{font-size:14px;color:rgba(216,220,232,.3);letter-spacing:.1em;text-transform:uppercase}
-.d3 .pillars3{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
-  padding-bottom:80px;
+.d3 .essay3 p{font-size:16px;line-height:1.9;color:rgba(200,191,176,.45);font-weight:300}
+.d3 .prints3{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:40px 0 80px;
 }
-.d3 .pill3{
-  padding:36px 28px;border-radius:20px;
-  background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);
+.d3 .print{
+  padding:32px 24px;border:1px solid rgba(200,191,176,.05);
+  background:rgba(200,191,176,.015);
 }
-.d3 .pill3 h3{font-size:20px;font-weight:400;margin-bottom:12px}
-.d3 .pill3 p{font-size:16px;line-height:1.7;color:rgba(216,220,232,.4);font-weight:300}
+.d3 .print .label{
+  font-family:'Epilogue',sans-serif;font-size:10px;font-weight:700;
+  letter-spacing:.15em;text-transform:uppercase;color:var(--red);margin-bottom:12px;
+}
+.d3 .print h3{font-size:17px;font-weight:400;color:#d8d0c0;margin-bottom:8px}
+.d3 .print p{font-size:14px;line-height:1.8;color:rgba(200,191,176,.35);font-weight:300}
 .d3 .cta3{
-  text-align:center;padding:40px 0 120px;
+  text-align:center;padding:40px 0 100px;
 }
 .d3 .cta3 a{
-  display:inline-block;padding:16px 40px;border-radius:999px;
-  border:1px solid rgba(165,180,252,.3);color:#a5b4fc;
-  font-size:16px;font-weight:400;letter-spacing:.04em;
+  display:inline-block;padding:16px 40px;
+  border:1px solid rgba(212,135,63,.3);color:var(--amber);
+  font-family:'Epilogue',sans-serif;font-weight:700;font-size:13px;
+  letter-spacing:.1em;text-transform:uppercase;text-decoration:none;
   transition:all .3s;
 }
-.d3 .cta3 a:hover{background:rgba(165,180,252,.1);border-color:rgba(165,180,252,.5)}
+.d3 .cta3 a:hover{background:rgba(212,135,63,.1);border-color:var(--amber)}
 @media(max-width:800px){
-  .d3 .founders3,.d3 .pillars3{grid-template-columns:1fr 1fr}
-}
-@media(max-width:500px){
-  .d3 .founders3,.d3 .pillars3{grid-template-columns:1fr}
+  .d3 .contacts3{grid-template-columns:repeat(2,1fr)}
+  .d3 .essay3{grid-template-columns:1fr}
+  .d3 .prints3{grid-template-columns:1fr}
 }
 
-/* ══════════════════════════════════════════
-   4 — "VAULT"
-   Black + brass. Architectural. Art-deco 
-   geometry. Sharp lines. Engraved feel.
-══════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════
+   4 — GREENHOUSE
+   
+   Botanical. Alive. Growing. Soft sage, moss,
+   cream. Organic rounded shapes. Generous padding.
+   Everything breathes and has space.
+   
+   Differentiation: The warmth. Rounded corners 
+   everywhere. Feels like walking into a greenhouse
+   on a cool morning. Gentle hover animations.
+   
+   Fonts: Lora (elegant transitional serif for 
+   headings) + Crimson Pro (refined body)
+   Color: Soft cream + sage green + deep moss
+══════════════════════════════════════════════════ */
 .d4{
-  background:#08080a;color:#e8e0d0;
-  font-family:'Libre Baskerville',Georgia,serif;
-}
-.d4 .deco-line{
-  height:1px;
-  background:linear-gradient(90deg,transparent 0%,#b89b5e 15%,#b89b5e 85%,transparent 100%);
-  opacity:.3;
+  --cream:#f6f3ec;--sage:#7a9e7e;--moss:#2d4a32;--leaf:#4a7a50;
+  background:var(--cream);color:var(--moss);
+  font-family:'Crimson Pro',Georgia,serif;
 }
 .d4 .nav4{
-  padding:28px 6vw;display:flex;justify-content:space-between;align-items:center;
+  padding:24px 6vw;display:flex;justify-content:space-between;align-items:center;
 }
 .d4 .nav4 .mark{
-  font-size:11px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;
-  color:#b89b5e;
+  font-family:'Lora',serif;font-weight:500;font-size:15px;color:var(--sage);font-style:italic;
 }
-.d4 .nav4 .tagline4{font-size:12px;color:rgba(232,224,208,.3);font-style:italic}
+.d4 .nav4 .season{font-size:12px;color:rgba(45,74,50,.35);letter-spacing:.06em}
 .d4 .hero4{
   padding:100px 6vw 80px;text-align:center;
-  position:relative;
+  animation:greenhouse .8s cubic-bezier(.16,1,.3,1) both;
 }
-.d4 .hero4::before{
-  content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  width:360px;height:360px;
-  border:1px solid rgba(184,155,94,.1);border-radius:50%;
-  pointer-events:none;
+@keyframes greenhouse{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:scale(1)}}
+.d4 .hero4 .sprig{
+  display:inline-block;font-size:32px;margin-bottom:24px;
+  animation:sway 4s ease-in-out infinite;
 }
-.d4 .hero4::after{
-  content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(45deg);
-  width:260px;height:260px;
-  border:1px solid rgba(184,155,94,.08);
-  pointer-events:none;
-}
+@keyframes sway{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
 .d4 .hero4 h1{
-  font-weight:400;font-size:clamp(40px,7vw,84px);line-height:1.05;
-  position:relative;z-index:1;
+  font-family:'Lora',serif;font-weight:700;
+  font-size:clamp(38px,7vw,76px);line-height:1.05;
+  color:var(--moss);max-width:700px;margin:0 auto 24px;
 }
-.d4 .hero4 h1 .gold{color:#b89b5e}
+.d4 .hero4 h1 em{font-style:italic;color:var(--sage)}
 .d4 .hero4 p{
-  margin-top:24px;font-size:17px;color:rgba(232,224,208,.45);
-  max-width:500px;margin-left:auto;margin-right:auto;
-  line-height:1.75;position:relative;z-index:1;
+  font-size:18px;line-height:1.8;color:rgba(45,74,50,.5);
+  max-width:500px;margin:0 auto;font-weight:300;
 }
-.d4 .founders4{
-  display:grid;grid-template-columns:repeat(4,1fr);
-  border-top:1px solid rgba(184,155,94,.12);
-  border-bottom:1px solid rgba(184,155,94,.12);
+.d4 .leaf-divider{
+  width:40px;height:2px;background:var(--sage);margin:48px auto;border-radius:99px;
+  opacity:.4;
 }
-.d4 .fd4{
-  padding:56px 24px;text-align:center;
-  border-right:1px solid rgba(184,155,94,.08);
-  transition:background .3s;
-  position:relative;
+.d4 .cards4{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:20px;
+  padding:0 6vw 64px;
 }
-.d4 .fd4:last-child{border-right:none}
-.d4 .fd4:hover{background:rgba(184,155,94,.04)}
-.d4 .fd4 .mono{
-  font-size:40px;color:#b89b5e;margin-bottom:16px;
-  font-family:'Playfair Display',serif;font-weight:400;font-style:italic;
+.d4 .c4{
+  background:#fff;border-radius:24px;padding:48px 20px;text-align:center;
+  box-shadow:0 2px 20px rgba(45,74,50,.04);
+  transition:transform .4s cubic-bezier(.22,1,.36,1),box-shadow .4s;
+  animation:greenhouse .6s cubic-bezier(.16,1,.3,1) both;
 }
-.d4 .fd4 .nm{font-size:18px;font-weight:700;letter-spacing:.06em;margin-bottom:4px}
-.d4 .fd4 .rl{font-size:12px;color:rgba(232,224,208,.3);letter-spacing:.12em;text-transform:uppercase}
-.d4 .tenets{
-  padding:80px 6vw;
-  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
-  background:rgba(184,155,94,.08);
+.d4 .c4:nth-child(1){animation-delay:.08s}
+.d4 .c4:nth-child(2){animation-delay:.14s}
+.d4 .c4:nth-child(3){animation-delay:.2s}
+.d4 .c4:nth-child(4){animation-delay:.26s}
+.d4 .c4:hover{transform:translateY(-8px);box-shadow:0 16px 48px rgba(45,74,50,.08)}
+.d4 .c4 .seed{
+  width:64px;height:64px;border-radius:50%;margin:0 auto 20px;
+  background:linear-gradient(135deg,rgba(122,158,126,.2),rgba(74,122,80,.15));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Lora',serif;font-size:26px;font-weight:700;
+  color:var(--sage);
 }
-.d4 .tenet{
-  background:#08080a;padding:48px 32px;
-  transition:background .3s;
+.d4 .c4 .nm{font-family:'Lora',serif;font-weight:700;font-size:19px;color:var(--moss);margin-bottom:4px}
+.d4 .c4 .rl{font-size:14px;color:var(--sage);font-style:italic;font-weight:300}
+.d4 .grow{
+  padding:64px 6vw;
+  background:rgba(122,158,126,.06);
 }
-.d4 .tenet:hover{background:#0e0e12}
-.d4 .tenet .num{
-  font-family:'Playfair Display',serif;font-size:32px;font-style:italic;
-  color:#b89b5e;margin-bottom:16px;
+.d4 .grow-inner{
+  display:grid;grid-template-columns:1fr 1fr;gap:48px;
+  max-width:960px;margin:0 auto;
 }
-.d4 .tenet h3{font-size:16px;font-weight:700;letter-spacing:.04em;margin-bottom:12px}
-.d4 .tenet p{font-size:14px;color:rgba(232,224,208,.4);line-height:1.8}
+.d4 .grow h2{font-family:'Lora',serif;font-size:28px;font-weight:700;margin-bottom:16px}
+.d4 .grow p{font-size:16px;line-height:1.85;color:rgba(45,74,50,.55);font-weight:300}
+.d4 .tendrils{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
+  padding:64px 6vw;
+}
+.d4 .tendril{
+  background:#fff;border-radius:20px;padding:32px 24px;
+  box-shadow:0 2px 16px rgba(45,74,50,.03);
+}
+.d4 .tendril .icon{font-size:24px;margin-bottom:16px}
+.d4 .tendril h3{font-family:'Lora',serif;font-size:17px;font-weight:700;margin-bottom:8px}
+.d4 .tendril p{font-size:14px;line-height:1.8;color:rgba(45,74,50,.45);font-weight:300}
 .d4 .cta4{
-  text-align:center;padding:80px 6vw 120px;
+  text-align:center;padding:40px 6vw 100px;
 }
 .d4 .cta4 a{
-  display:inline-block;padding:18px 48px;
-  border:1px solid #b89b5e;color:#b89b5e;
-  font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
-  transition:all .3s;
+  display:inline-block;padding:16px 40px;border-radius:999px;
+  background:var(--sage);color:#fff;font-family:'Lora',serif;
+  font-weight:700;font-size:16px;text-decoration:none;
+  transition:background .3s,transform .3s;
 }
-.d4 .cta4 a:hover{background:#b89b5e;color:#08080a}
+.d4 .cta4 a:hover{background:var(--moss);transform:scale(1.04)}
 @media(max-width:800px){
-  .d4 .founders4{grid-template-columns:repeat(2,1fr)}
-  .d4 .fd4:nth-child(2n){border-right:none}
-  .d4 .tenets{grid-template-columns:1fr}
+  .d4 .cards4,.d4 .tendrils{grid-template-columns:repeat(2,1fr)}
+  .d4 .grow-inner{grid-template-columns:1fr}
+}
+@media(max-width:500px){
+  .d4 .cards4,.d4 .tendrils{grid-template-columns:1fr}
 }
 
-/* ══════════════════════════════════════════
-   5 — "KINETIC"
-   White bg. Giant bold sans. Energetic.
-   Oversized type. Scrolling marquee.
-   Playful but purposeful.
-══════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════
+   5 — CONCRETE
+   
+   Neo-brutalist. Raw. Aggressive borders. Offset 
+   shadows. Loud color blocks. No subtlety.
+   
+   Differentiation: Unapologetic visual weight.
+   Elements that feel like they have mass. Thick
+   borders. Colors that punch you.
+   
+   Fonts: Archivo Black (display — extreme weight) +
+   Red Hat Display (body — geometric, sturdy)
+   Color: Concrete grey + electric blue accent + 
+   hot pink secondary + black borders
+══════════════════════════════════════════════════ */
 .d5{
-  background:#fafafa;color:#111;
-  font-family:'Anybody',system-ui,sans-serif;
+  --concrete:#e8e4de;--black:#111;--blue:#1a5cff;--pink:#ff2d6b;
+  --shadow:4px 4px 0 var(--black);
+  background:var(--concrete);color:var(--black);
+  font-family:'Red Hat Display',system-ui,sans-serif;
+  background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 60L60 0' stroke='%23ccc8c0' stroke-width='.5' fill='none'/%3E%3C/svg%3E");
+}
+.d5 .bar5{
+  padding:16px 5vw;display:flex;justify-content:space-between;align-items:center;
+  border-bottom:3px solid var(--black);
+}
+.d5 .bar5 .logo{font-family:'Archivo Black',sans-serif;font-size:14px;text-transform:uppercase}
+.d5 .bar5 .tag5{
+  background:var(--blue);color:#fff;padding:6px 14px;
+  font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  border:2px solid var(--black);box-shadow:2px 2px 0 var(--black);
 }
 .d5 .hero5{
-  padding:120px 6vw 60px;
-  position:relative;overflow:hidden;
+  padding:80px 5vw 60px;
 }
 .d5 .hero5 h1{
-  font-weight:900;font-size:clamp(48px,11vw,160px);
-  line-height:.88;letter-spacing:-.04em;
-  text-transform:uppercase;
+  font-family:'Archivo Black',sans-serif;
+  font-size:clamp(48px,12vw,160px);line-height:.88;
+  text-transform:uppercase;letter-spacing:-.03em;
+  animation:concreteSlam .5s cubic-bezier(.16,1,.3,1) both;
 }
-.d5 .hero5 h1 .outline{
-  -webkit-text-stroke:2px #111;-webkit-text-fill-color:transparent;
-}
-.d5 .hero5 h1 .accent{color:#ff3d00}
+.d5 .hero5 h1 .blue{color:var(--blue)}
+.d5 .hero5 h1 .pink{color:var(--pink)}
+@keyframes concreteSlam{from{opacity:0;transform:translateY(20px) rotate(-1deg)}to{opacity:1;transform:none}}
 .d5 .hero5 p{
-  margin-top:28px;font-size:17px;font-weight:400;color:#666;
-  max-width:480px;line-height:1.7;
+  margin-top:24px;font-size:17px;line-height:1.7;color:#555;max-width:500px;font-weight:400;
 }
-.d5 .marquee-wrap{
-  overflow:hidden;padding:32px 0;border-top:2px solid #111;border-bottom:2px solid #111;
-  margin:40px 0;
+.d5 .strip5{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-top:3px solid var(--black);border-bottom:3px solid var(--black);
 }
-.d5 .marquee{
-  display:flex;gap:48px;white-space:nowrap;
-  animation:scroll 18s linear infinite;
-  font-size:14px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
-  color:#999;
-}
-.d5 .marquee .dot{color:#ff3d00}
-@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-.d5 .founders5{
-  padding:60px 6vw;
-  display:grid;grid-template-columns:repeat(4,1fr);gap:20px;
-}
-.d5 .f5{
+.d5 .s5{
   padding:48px 20px;text-align:center;
-  border:2px solid #eee;border-radius:20px;
-  transition:all .25s cubic-bezier(.22,1,.36,1);
-  position:relative;overflow:hidden;
+  border-right:3px solid var(--black);
+  transition:background .2s;
 }
-.d5 .f5::before{
-  content:'';position:absolute;inset:0;
-  background:#ff3d00;transform:translateY(100%);
-  transition:transform .35s cubic-bezier(.22,1,.36,1);
-  z-index:0;border-radius:18px;
+.d5 .s5:last-child{border-right:none}
+.d5 .s5:hover{background:var(--blue);color:#fff}
+.d5 .s5 .ini{
+  font-family:'Archivo Black',sans-serif;font-size:56px;line-height:1;
+  margin-bottom:12px;
 }
-.d5 .f5:hover::before{transform:translateY(0)}
-.d5 .f5:hover{border-color:#ff3d00;color:#fff}
-.d5 .f5 *{position:relative;z-index:1}
-.d5 .f5 .ini{
-  font-weight:900;font-size:48px;line-height:1;margin-bottom:12px;
-  text-transform:uppercase;
+.d5 .s5:nth-child(1) .ini{color:var(--blue)}
+.d5 .s5:nth-child(2) .ini{color:var(--pink)}
+.d5 .s5:nth-child(3) .ini{color:var(--blue)}
+.d5 .s5:nth-child(4) .ini{color:var(--pink)}
+.d5 .s5:hover .ini{color:#fff}
+.d5 .s5 .nm{font-weight:900;font-size:20px;margin-bottom:2px}
+.d5 .s5 .rl{font-size:12px;color:#888;font-weight:500;text-transform:uppercase;letter-spacing:.08em}
+.d5 .s5:hover .rl{color:rgba(255,255,255,.7)}
+.d5 .blocks5{
+  display:grid;grid-template-columns:1fr 1fr;padding:48px 5vw;gap:20px;
 }
-.d5 .f5 .nm{font-weight:700;font-size:18px;letter-spacing:.02em}
-.d5 .f5 .rl{font-size:12px;color:#999;margin-top:4px;font-weight:400;transition:color .3s}
-.d5 .f5:hover .rl{color:rgba(255,255,255,.7)}
-.d5 .manifesto5{
-  padding:80px 6vw;
-  display:grid;grid-template-columns:.5fr .5fr;gap:60px;
-  align-items:start;
+.d5 .block{
+  border:3px solid var(--black);padding:36px 28px;
+  box-shadow:var(--shadow);
+  transition:transform .2s,box-shadow .2s;
 }
-.d5 .manifesto5 h2{
-  font-weight:900;font-size:clamp(28px,5vw,56px);
-  line-height:1;text-transform:uppercase;letter-spacing:-.02em;
+.d5 .block:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--black)}
+.d5 .block h3{
+  font-family:'Archivo Black',sans-serif;font-size:18px;text-transform:uppercase;
+  margin-bottom:12px;
 }
-.d5 .manifesto5 h2 .accent{color:#ff3d00}
-.d5 .manifesto5 .body5{font-size:16px;line-height:1.8;color:#555;font-weight:400}
+.d5 .block:nth-child(1) h3{color:var(--blue)}
+.d5 .block:nth-child(2) h3{color:var(--pink)}
+.d5 .block p{font-size:15px;line-height:1.7;color:#555}
+.d5 .values5{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
+  padding:0 5vw 48px;
+}
+.d5 .v5{
+  background:var(--black);color:#fff;padding:28px 20px;
+  border:3px solid var(--black);
+  box-shadow:var(--shadow);
+  transition:transform .2s;
+}
+.d5 .v5:hover{transform:translate(-2px,-2px)}
+.d5 .v5 h4{font-family:'Archivo Black',sans-serif;font-size:14px;text-transform:uppercase;margin-bottom:8px;color:var(--blue)}
+.d5 .v5:nth-child(2) h4{color:var(--pink)}
+.d5 .v5:nth-child(3) h4{color:#ffd600}
+.d5 .v5 p{font-size:13px;line-height:1.7;color:rgba(255,255,255,.6)}
 .d5 .cta5{
-  padding:60px 6vw 120px;text-align:center;
+  padding:48px 5vw 100px;text-align:center;
 }
 .d5 .cta5 a{
   display:inline-block;padding:18px 48px;
-  background:#111;color:#fff;border-radius:999px;
-  font-weight:700;font-size:15px;letter-spacing:.04em;text-transform:uppercase;
-  transition:all .25s;
+  background:var(--blue);color:#fff;
+  border:3px solid var(--black);box-shadow:var(--shadow);
+  font-family:'Archivo Black',sans-serif;font-size:16px;text-transform:uppercase;
+  text-decoration:none;letter-spacing:.04em;
+  transition:all .15s;
 }
-.d5 .cta5 a:hover{background:#ff3d00;transform:scale(1.05)}
+.d5 .cta5 a:hover{background:var(--pink);transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--black)}
 @media(max-width:800px){
-  .d5 .founders5,.d5 .manifesto5{grid-template-columns:1fr 1fr}
-}
-@media(max-width:500px){
-  .d5 .founders5{grid-template-columns:1fr}
-  .d5 .manifesto5{grid-template-columns:1fr}
+  .d5 .strip5{grid-template-columns:repeat(2,1fr)}
+  .d5 .s5:nth-child(2){border-right:none}
+  .d5 .blocks5,.d5 .values5{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
 
-<!-- ━━━━ 1: PAPER ━━━━ -->
+<!-- ━━━━ 1: SPECIMEN ━━━━ -->
 <div class="design d1 active" id="d1">
-  <div class="mast">
-    <div class="mast-title">Impact Deeptech Collective</div>
-    <div class="mast-date">Est. 2025 · Four Founders</div>
+  <div class="spec-head">
+    <span>Impact Deeptech Collective</span>
+    <span>Type Specimen No. 01 — Four Founders</span>
   </div>
-  <div class="hero-ed">
-    <h1>Building what <em>matters.</em></h1>
-    <div class="aside">
-      A small collective of deeptech founders aligned around a shared mission — build durable, science-backed companies that move society forward. Not hype. Not noise. Just hard, purposeful work.
-    </div>
+  <div class="giant">
+    <h1>Building<br>what <span class="r">matters.</span></h1>
+    <p class="note">A small collective of deeptech founders aligned around a shared mission — build durable, science-backed companies that move society forward.</p>
   </div>
-  <div class="rule"></div>
-  <div class="cols">
-    <div class="person"><div class="ini">K</div><div class="nm">Kenny</div><div class="rl">Founder</div></div>
-    <div class="person"><div class="ini">L</div><div class="nm">Lindsey</div><div class="rl">Founder</div></div>
-    <div class="person"><div class="ini">M</div><div class="nm">Michelle</div><div class="rl">Founder</div></div>
-    <div class="person"><div class="ini">P</div><div class="nm">Pete</div><div class="rl">Founder</div></div>
+  <div class="spec-rule"></div>
+  <div class="spec-cols">
+    <div class="spec-person"><div class="letter">K</div><div class="nm">Kenny</div><div class="cap">Founder</div></div>
+    <div class="spec-person"><div class="letter">L</div><div class="nm">Lindsey</div><div class="cap">Founder</div></div>
+    <div class="spec-person"><div class="letter">M</div><div class="nm">Michelle</div><div class="cap">Founder</div></div>
+    <div class="spec-person"><div class="letter">P</div><div class="nm">Pete</div><div class="cap">Founder</div></div>
   </div>
-  <div class="rule thin"></div>
-  <div class="manifesto">
+  <div class="spec-rule light"></div>
+  <div class="spec-text">
     <h2>We champion technology that scales with integrity.</h2>
     <div class="body">
       <p>Climate, energy, agriculture, human well-being — we look for systems-level solutions and invite only those who operate with uncommon rigor. We trade insights, share talent networks, and invest in each other's success.</p>
       <p style="margin-top:16px">Small by design. Built for trust, candor, and compounding impact over years — not quarters. We believe the most important technologies of this decade will be both high-leverage and high-integrity.</p>
     </div>
   </div>
-  <div class="rule"></div>
-  <div class="foot">
-    <span style="font-size:13px;color:#8a8078">Impact · Deeptech · Collective</span>
-    <a href="mailto:hello@example.com" class="link">Get in touch →</a>
+  <div class="spec-rule"></div>
+  <div class="spec-foot">
+    <span style="font-size:12px;color:rgba(20,18,16,.35);letter-spacing:.1em;text-transform:uppercase">Impact · Deeptech · Collective</span>
+    <a href="mailto:hello@example.com">Get in touch →</a>
   </div>
 </div>
 
-<!-- ━━━━ 2: SIGNAL ━━━━ -->
+<!-- ━━━━ 2: TERRAIN ━━━━ -->
 <div class="design d2" id="d2">
-  <div class="bar">
-    <div class="logo">IDC // Impact Deeptech Collective</div>
-    <div class="meta">SYS.ONLINE — 4 NODES ACTIVE</div>
+  <div class="topo-bg">
+    <svg viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <style>
+          .tline{fill:none;stroke:rgba(200,146,60,.08);stroke-width:.5}
+          @keyframes tshift{0%{transform:translateY(0)}100%{transform:translateY(-20px)}}
+          .tgroup{animation:tshift 12s ease-in-out infinite alternate}
+        </style>
+      </defs>
+      <g class="tgroup">
+        <ellipse class="tline" cx="400" cy="300" rx="180" ry="120"/>
+        <ellipse class="tline" cx="400" cy="300" rx="250" ry="170"/>
+        <ellipse class="tline" cx="400" cy="300" rx="330" ry="230"/>
+        <ellipse class="tline" cx="400" cy="300" rx="420" ry="300"/>
+        <ellipse class="tline" cx="400" cy="300" rx="520" ry="380"/>
+        <ellipse class="tline" cx="650" cy="650" rx="150" ry="100"/>
+        <ellipse class="tline" cx="650" cy="650" rx="240" ry="160"/>
+        <ellipse class="tline" cx="650" cy="650" rx="340" ry="230"/>
+        <ellipse class="tline" cx="650" cy="650" rx="450" ry="310"/>
+        <ellipse class="tline" cx="150" cy="700" rx="100" ry="80"/>
+        <ellipse class="tline" cx="150" cy="700" rx="180" ry="140"/>
+        <ellipse class="tline" cx="150" cy="700" rx="270" ry="210"/>
+      </g>
+    </svg>
   </div>
-  <div class="splash">
-    <h1>Collective power for breakthrough impact.</h1>
-    <p>A founder coalition transforming frontier science into systems-level change across climate, energy, agriculture, and health.</p>
-  </div>
-  <div class="grid4">
-    <div class="cell"><div class="tag">Founders</div><div class="val">04</div><div class="desc">Active members</div></div>
-    <div class="cell"><div class="tag">Companies</div><div class="val">04</div><div class="desc">Deeptech ventures</div></div>
-    <div class="cell"><div class="tag">Alignment</div><div class="val">100%</div><div class="desc">Mission-driven</div></div>
-    <div class="cell"><div class="tag">Horizon</div><div class="val">∞</div><div class="desc">Long-term only</div></div>
-  </div>
-  <div class="founders-strip">
-    <div class="f-cell"><div class="code">K</div><div class="nm">Kenny</div><div class="rl">FOUNDER</div></div>
-    <div class="f-cell"><div class="code">L</div><div class="nm">Lindsey</div><div class="rl">FOUNDER</div></div>
-    <div class="f-cell"><div class="code">M</div><div class="nm">Michelle</div><div class="rl">FOUNDER</div></div>
-    <div class="f-cell"><div class="code">P</div><div class="nm">Pete</div><div class="rl">FOUNDER</div></div>
-  </div>
-  <div class="block-text">
-    <h2>Mission_</h2>
-    <div>
-      <p>We build asymmetric solutions — radical enough to matter, disciplined enough to scale. No hype cycles. Just hard science meeting real problems.</p>
-      <p style="margin-top:16px">Technology without purpose is complexity. We measure success by systems changed, lives improved, ecosystems restored.</p>
+  <div class="inner2">
+    <div class="wrap2">
+      <div class="nav2">
+        <div class="mark">IDC — Impact Deeptech Collective</div>
+        <div class="coord">47.6°N · 122.3°W</div>
+      </div>
+      <div class="hero2">
+        <h1>Charting new <span class="ochre">territory.</span></h1>
+        <div class="aside2">Four founders mapping the frontier of impact-driven deeptech — across climate, energy, agriculture, and human well-being.</div>
+      </div>
+      <div class="contour-divider"></div>
+      <div class="grid2">
+        <div class="g2-card"><div class="sym">K</div><div class="nm">Kenny</div><div class="rl">Founder</div></div>
+        <div class="g2-card"><div class="sym">L</div><div class="nm">Lindsey</div><div class="rl">Founder</div></div>
+        <div class="g2-card"><div class="sym">M</div><div class="nm">Michelle</div><div class="rl">Founder</div></div>
+        <div class="g2-card"><div class="sym">P</div><div class="nm">Pete</div><div class="rl">Founder</div></div>
+      </div>
+      <div class="mission2">
+        <h2>We build for the<br>long horizon.</h2>
+        <div>
+          <p>We champion deep technology that scales with integrity, valuing long-term outcomes over short-term noise. Our collaboration is designed to deepen conviction, not dilute it.</p>
+          <p style="margin-top:16px">Small by design — built for trust, candor, and compounding impact over years, not quarters.</p>
+        </div>
+      </div>
+      <div class="expedition">
+        <div class="exp-card"><div class="num">BEARING 01</div><h3>Impact with Rigor</h3><p>Quantify outcomes, validate claims, build for real-world adoption.</p></div>
+        <div class="exp-card"><div class="num">BEARING 02</div><h3>Deeptech, Responsibly</h3><p>Advance frontier science with ethical guardrails and long-term stewardship.</p></div>
+        <div class="exp-card"><div class="num">BEARING 03</div><h3>Founder Alliance</h3><p>Share networks, cross-pollinate ideas, invest in each other's success.</p></div>
+      </div>
+      <div class="foot2">
+        <span style="font-size:12px;color:rgba(212,197,169,.25)">© Impact Deeptech Collective</span>
+        <a href="mailto:hello@example.com">Chart a course together →</a>
+      </div>
     </div>
-  </div>
-  <div class="foot2">
-    <span style="color:#4a5548;font-size:11px">© IDC — ALL SYSTEMS NOMINAL</span>
-    <a href="mailto:hello@example.com">INIT_CONTACT →</a>
   </div>
 </div>
 
-<!-- ━━━━ 3: AURORA ━━━━ -->
+<!-- ━━━━ 3: DARKROOM ━━━━ -->
 <div class="design d3" id="d3">
-  <div class="blobs">
-    <div class="blob a"></div>
-    <div class="blob b"></div>
-    <div class="blob c"></div>
-  </div>
-  <div class="inner">
+  <div class="inner3">
     <div class="wrap3">
+      <div class="top3">
+        <div class="mark">Impact Deeptech Collective</div>
+        <div class="exp">Exposure 03 — Four Founders</div>
+      </div>
       <div class="hero3">
-        <div class="over">Impact Deeptech Collective</div>
-        <h1>Where science meets <em>purpose.</em></h1>
-        <p>A small gathering of founders building durable, impact-driven deeptech companies — together.</p>
+        <h1>Developing the <span class="glow">future.</span></h1>
+        <p>Four founders. One darkroom. Building durable, impact-driven deeptech companies in the space between vision and reality.</p>
       </div>
-
-      <div class="orb-divider"></div>
-
-      <div class="founders3">
-        <div class="fc3"><div class="ava">K</div><div class="nm">Kenny</div><div class="rl">Founder</div></div>
-        <div class="fc3"><div class="ava">L</div><div class="nm">Lindsey</div><div class="rl">Founder</div></div>
-        <div class="fc3"><div class="ava">M</div><div class="nm">Michelle</div><div class="rl">Founder</div></div>
-        <div class="fc3"><div class="ava">P</div><div class="nm">Pete</div><div class="rl">Founder</div></div>
+      <div class="amber-line"></div>
+      <div class="contacts3">
+        <div class="cx3"><div class="ini">K</div><div class="nm">Kenny</div><div class="rl">Founder</div></div>
+        <div class="cx3"><div class="ini">L</div><div class="nm">Lindsey</div><div class="rl">Founder</div></div>
+        <div class="cx3"><div class="ini">M</div><div class="nm">Michelle</div><div class="rl">Founder</div></div>
+        <div class="cx3"><div class="ini">P</div><div class="nm">Pete</div><div class="rl">Founder</div></div>
       </div>
-
-      <div class="philosophy">
-        <blockquote>"The most important technologies of this decade will be both high-leverage and high-integrity."</blockquote>
-        <div class="attr">— Our Founding Belief</div>
+      <div class="essay3">
+        <h2>Patience is our process.</h2>
+        <div>
+          <p>Like a photograph emerging in developer solution, the most important technologies reveal themselves slowly. We champion deep technology that scales with integrity — climate, energy, agriculture, human well-being.</p>
+          <p style="margin-top:16px">We trade insights, share talent networks, and invest in each other's success. Small by design. Built for trust and compounding impact.</p>
+        </div>
       </div>
-
-      <div class="pillars3">
-        <div class="pill3"><h3>Impact with Rigor</h3><p>Quantify outcomes, validate claims, and build for real-world adoption — not pitch decks.</p></div>
-        <div class="pill3"><h3>Deeptech, Responsibly</h3><p>Advance frontier science with ethical guardrails and long-term stewardship.</p></div>
-        <div class="pill3"><h3>Founder Collaboration</h3><p>Share networks, cross-pollinate ideas, and invest in each other's success.</p></div>
+      <div class="prints3">
+        <div class="print"><div class="label">Print 01</div><h3>Impact with Rigor</h3><p>Quantify outcomes, validate claims, build for real-world adoption — not pitch decks.</p></div>
+        <div class="print"><div class="label">Print 02</div><h3>Deeptech, Responsibly</h3><p>Advance frontier science with ethical guardrails and long-term stewardship.</p></div>
+        <div class="print"><div class="label">Print 03</div><h3>Founder Collaboration</h3><p>Share networks, cross-pollinate ideas, invest in each other's enduring success.</p></div>
       </div>
-
       <div class="cta3">
-        <a href="mailto:hello@example.com">Connect with us →</a>
+        <a href="mailto:hello@example.com">Step into the darkroom →</a>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ━━━━ 4: VAULT ━━━━ -->
+<!-- ━━━━ 4: GREENHOUSE ━━━━ -->
 <div class="design d4" id="d4">
   <div class="nav4">
     <div class="mark">Impact Deeptech Collective</div>
-    <div class="tagline4">Est. 2025</div>
+    <div class="season">Growing Season</div>
   </div>
-  <div class="deco-line"></div>
   <div class="hero4">
-    <h1>Purpose meets <span class="gold">precision.</span></h1>
-    <p>A private collective of founders deploying elite deeptech to elevate humanity's most urgent systems.</p>
+    <div class="sprig">🌱</div>
+    <h1>Where science meets <em>growth.</em></h1>
+    <p>A small gathering of founders cultivating durable, impact-driven deeptech companies — patiently, purposefully, together.</p>
   </div>
-  <div class="founders4">
-    <div class="fd4"><div class="mono">K</div><div class="nm">Kenny</div><div class="rl">Founder</div></div>
-    <div class="fd4"><div class="mono">L</div><div class="nm">Lindsey</div><div class="rl">Founder</div></div>
-    <div class="fd4"><div class="mono">M</div><div class="nm">Michelle</div><div class="rl">Founder</div></div>
-    <div class="fd4"><div class="mono">P</div><div class="nm">Pete</div><div class="rl">Founder</div></div>
+  <div class="leaf-divider"></div>
+  <div class="cards4">
+    <div class="c4"><div class="seed">K</div><div class="nm">Kenny</div><div class="rl">Founder</div></div>
+    <div class="c4"><div class="seed">L</div><div class="nm">Lindsey</div><div class="rl">Founder</div></div>
+    <div class="c4"><div class="seed">M</div><div class="nm">Michelle</div><div class="rl">Founder</div></div>
+    <div class="c4"><div class="seed">P</div><div class="nm">Pete</div><div class="rl">Founder</div></div>
   </div>
-  <div class="tenets">
-    <div class="tenet"><div class="num">I</div><h3>Impact with Rigor</h3><p>Quantify outcomes, validate claims, and build for real-world adoption. Conviction backed by evidence.</p></div>
-    <div class="tenet"><div class="num">II</div><h3>Deeptech, Responsibly</h3><p>Advance frontier science with ethical guardrails and long-term stewardship. No shortcuts.</p></div>
-    <div class="tenet"><div class="num">III</div><h3>Founder Alliance</h3><p>Share networks, cross-pollinate ideas, and invest in each other's enduring success.</p></div>
+  <div class="grow">
+    <div class="grow-inner">
+      <div>
+        <h2>Rooted in purpose.</h2>
+        <p>We champion deep technology that scales with integrity. Climate, energy, agriculture, human well-being — we look for systems-level solutions and nurture only what's built to last.</p>
+      </div>
+      <div>
+        <h2>Growing together.</h2>
+        <p>We trade insights, share talent networks, and invest in each other's success. Small by design — built for trust, candor, and compounding impact over years, not quarters.</p>
+      </div>
+    </div>
+  </div>
+  <div class="tendrils">
+    <div class="tendril"><div class="icon">🌿</div><h3>Impact with Rigor</h3><p>Quantify outcomes, validate claims, build for real-world adoption.</p></div>
+    <div class="tendril"><div class="icon">🧬</div><h3>Deeptech, Responsibly</h3><p>Advance frontier science with ethical guardrails and long-term stewardship.</p></div>
+    <div class="tendril"><div class="icon">🤝</div><h3>Founder Symbiosis</h3><p>Share networks, cross-pollinate ideas, invest in each other's success.</p></div>
   </div>
   <div class="cta4">
-    <a href="mailto:hello@example.com">Request Introduction</a>
+    <a href="mailto:hello@example.com">Let's grow something →</a>
   </div>
 </div>
 
-<!-- ━━━━ 5: KINETIC ━━━━ -->
+<!-- ━━━━ 5: CONCRETE ━━━━ -->
 <div class="design d5" id="d5">
+  <div class="bar5">
+    <div class="logo">IDC</div>
+    <div class="tag5">Impact × Deeptech</div>
+  </div>
   <div class="hero5">
-    <h1><span class="outline">Impact</span><br><span class="accent">Deep</span>tech<br>Collective</h1>
-    <p>Four founders. One mission. Building science-backed companies that move society forward — with rigor, speed, and uncommon ambition.</p>
+    <h1><span class="blue">Impact</span><br>Deep<span class="pink">tech</span><br>Collective.</h1>
+    <p>Four founders. One mission. Building science-backed companies that move society forward — with rigor, speed, and uncommon ambition. No fluff.</p>
   </div>
-  <div class="marquee-wrap">
-    <div class="marquee">
-      <span>Climate <span class="dot">●</span> Energy <span class="dot">●</span> Agriculture <span class="dot">●</span> Health <span class="dot">●</span> Impact <span class="dot">●</span> Deeptech <span class="dot">●</span> Founders <span class="dot">●</span> Collective</span>
-      <span>Climate <span class="dot">●</span> Energy <span class="dot">●</span> Agriculture <span class="dot">●</span> Health <span class="dot">●</span> Impact <span class="dot">●</span> Deeptech <span class="dot">●</span> Founders <span class="dot">●</span> Collective</span>
+  <div class="strip5">
+    <div class="s5"><div class="ini">K</div><div class="nm">Kenny</div><div class="rl">Founder</div></div>
+    <div class="s5"><div class="ini">L</div><div class="nm">Lindsey</div><div class="rl">Founder</div></div>
+    <div class="s5"><div class="ini">M</div><div class="nm">Michelle</div><div class="rl">Founder</div></div>
+    <div class="s5"><div class="ini">P</div><div class="nm">Pete</div><div class="rl">Founder</div></div>
+  </div>
+  <div class="blocks5">
+    <div class="block">
+      <h3>Why Deeptech</h3>
+      <p>We build asymmetric solutions — radical enough to matter, disciplined enough to scale. No hype cycles. Just hard science meeting real problems.</p>
+    </div>
+    <div class="block">
+      <h3>Why Impact</h3>
+      <p>Technology without purpose is complexity. We measure success by systems changed, lives improved, and ecosystems restored.</p>
     </div>
   </div>
-  <div class="founders5">
-    <div class="f5"><div class="ini">K</div><div class="nm">Kenny</div><div class="rl">Founder</div></div>
-    <div class="f5"><div class="ini">L</div><div class="nm">Lindsey</div><div class="rl">Founder</div></div>
-    <div class="f5"><div class="ini">M</div><div class="nm">Michelle</div><div class="rl">Founder</div></div>
-    <div class="f5"><div class="ini">P</div><div class="nm">Pete</div><div class="rl">Founder</div></div>
-  </div>
-  <div class="manifesto5">
-    <h2>We build what <span class="accent">matters.</span></h2>
-    <div class="body5">
-      <p>We champion deep technology that scales with integrity, valuing long-term outcomes over short-term noise. Climate, energy, agriculture, human well-being — we look for systems-level solutions.</p>
-      <p style="margin-top:16px">Small by design. Built for trust, candor, and compounding impact over years — not quarters.</p>
-    </div>
+  <div class="values5">
+    <div class="v5"><h4>Rigor</h4><p>Quantify outcomes. Validate claims. Build for adoption.</p></div>
+    <div class="v5"><h4>Responsibility</h4><p>Frontier science with ethical guardrails. No shortcuts.</p></div>
+    <div class="v5"><h4>Alliance</h4><p>Share networks. Cross-pollinate. Invest in each other.</p></div>
   </div>
   <div class="cta5">
     <a href="mailto:hello@example.com">Let's Talk →</a>
@@ -678,36 +819,44 @@ a{color:inherit;text-decoration:none}
 </div>
 
 <!-- ━━━━ Switcher ━━━━ -->
-<nav class="switcher">
-  <button class="sw-nav" id="sw-prev">‹</button>
-  <button class="sw-btn on" data-i="0">1</button>
-  <button class="sw-btn" data-i="1">2</button>
-  <button class="sw-btn" data-i="2">3</button>
-  <button class="sw-btn" data-i="3">4</button>
-  <button class="sw-btn" data-i="4">5</button>
-  <button class="sw-nav" id="sw-next">›</button>
+<nav class="switcher" role="navigation" aria-label="Design switcher">
+  <button class="sw-a" id="sw-prev" aria-label="Previous design">‹</button>
+  <button class="sw-b on" data-i="0">1</button>
+  <button class="sw-b" data-i="1">2</button>
+  <button class="sw-b" data-i="2">3</button>
+  <button class="sw-b" data-i="3">4</button>
+  <button class="sw-b" data-i="4">5</button>
+  <button class="sw-a" id="sw-next" aria-label="Next design">›</button>
 </nav>
 
 <script>
 (function(){
-  const designs=document.querySelectorAll('.design');
-  const dots=document.querySelectorAll('.sw-btn');
-  let cur=0;
+  const ds=document.querySelectorAll('.design');
+  const bs=document.querySelectorAll('.sw-b');
+  let c=0;
   function go(i){
-    i=((i%designs.length)+designs.length)%designs.length;
-    designs[cur].classList.remove('active');
-    dots[cur].classList.remove('on');
-    cur=i;
-    designs[cur].classList.add('active');
-    dots[cur].classList.add('on');
+    i=((i%ds.length)+ds.length)%ds.length;
+    ds[c].classList.remove('active');
+    bs[c].classList.remove('on');
+    c=i;
+    ds[c].classList.add('active');
+    bs[c].classList.add('on');
     window.scrollTo({top:0,behavior:'instant'});
   }
-  dots.forEach(d=>d.addEventListener('click',()=>go(+d.dataset.i)));
-  document.getElementById('sw-prev').addEventListener('click',()=>go(cur-1));
-  document.getElementById('sw-next').addEventListener('click',()=>go(cur+1));
+  bs.forEach(b=>b.addEventListener('click',()=>go(+b.dataset.i)));
+  document.getElementById('sw-prev').addEventListener('click',()=>go(c-1));
+  document.getElementById('sw-next').addEventListener('click',()=>go(c+1));
   document.addEventListener('keydown',e=>{
-    if(e.key==='ArrowRight')go(cur+1);
-    if(e.key==='ArrowLeft')go(cur-1);
+    if(e.key==='ArrowRight')go(c+1);
+    if(e.key==='ArrowLeft')go(c-1);
+  });
+
+  // Touch swipe
+  let sx=0;
+  document.addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true});
+  document.addEventListener('touchend',e=>{
+    const dx=e.changedTouches[0].clientX-sx;
+    if(Math.abs(dx)>60){dx<0?go(c+1):go(c-1)}
   });
 })();
 </script>
