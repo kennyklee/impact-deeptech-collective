@@ -4,787 +4,710 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Impact Deeptech Collective</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Serif+Display&family=Space+Mono:wght@400;700&family=Sora:wght@300;400;500;600;700;800&family=Fraunces:ital,wght@0,300;0,500;0,700;0,900;1,400&display=swap" rel="stylesheet">
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Anybody:wght@100;400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Azeret+Mono:wght@300;400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Newsreader:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Unbounded:wght@200;400;700;900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+
+/* ── Reset ── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
 
-/* ── Switcher (always visible) ── */
-.theme-switcher{
-  position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9999;
-  display:flex;align-items:center;gap:6px;
-  padding:6px 8px;border-radius:60px;
-  background:rgba(0,0,0,.75);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  border:1px solid rgba(255,255,255,.12);
-  box-shadow:0 8px 32px rgba(0,0,0,.4);
-  font-family:'DM Sans',system-ui,sans-serif;
+/* ── Designs ── */
+.design{display:none;min-height:100vh}
+.design.active{display:block;animation:revealPage .6s cubic-bezier(.22,1,.36,1) both}
+@keyframes revealPage{from{opacity:0;filter:blur(4px)}to{opacity:1;filter:blur(0)}}
+
+/* ── Switcher ── */
+.switcher{
+  position:fixed;bottom:28px;left:50%;transform:translateX(-50%);z-index:9999;
+  display:flex;align-items:center;gap:4px;
+  padding:5px;border-radius:99px;
+  background:rgba(18,18,20,.88);backdrop-filter:blur(24px) saturate(1.8);
+  border:1px solid rgba(255,255,255,.06);
+  box-shadow:0 12px 48px rgba(0,0,0,.5),0 0 0 1px rgba(0,0,0,.3);
 }
-.theme-switcher .sw-label{
-  font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
-  color:rgba(255,255,255,.5);padding:0 8px;white-space:nowrap;
+.switcher button{
+  border:none;cursor:pointer;font-family:'Azeret Mono',monospace;
+  transition:all .2s cubic-bezier(.22,1,.36,1);outline:none;
 }
-.theme-switcher button{
-  border:none;cursor:pointer;font-family:inherit;
-  transition:all .25s ease;
+.sw-btn{
+  width:40px;height:40px;border-radius:50%;
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:400;color:rgba(255,255,255,.4);
+  background:transparent;
 }
-.theme-switcher .sw-dot{
+.sw-btn:hover{color:#fff;background:rgba(255,255,255,.08)}
+.sw-btn.on{color:#000;background:#fff;font-weight:700;box-shadow:0 2px 12px rgba(255,255,255,.15)}
+.sw-nav{
   width:36px;height:36px;border-radius:50%;
   display:inline-flex;align-items:center;justify-content:center;
-  font-size:13px;font-weight:600;color:rgba(255,255,255,.55);
-  background:rgba(255,255,255,.08);
+  font-size:18px;color:rgba(255,255,255,.3);background:transparent;
 }
-.theme-switcher .sw-dot:hover{background:rgba(255,255,255,.16);color:#fff}
-.theme-switcher .sw-dot.active{background:#fff;color:#000}
-.theme-switcher .sw-arrow{
-  width:32px;height:32px;border-radius:50%;
-  display:inline-flex;align-items:center;justify-content:center;
-  background:rgba(255,255,255,.06);color:rgba(255,255,255,.6);font-size:16px;
-}
-.theme-switcher .sw-arrow:hover{background:rgba(255,255,255,.14);color:#fff}
+.sw-nav:hover{color:#fff}
 
-/* ── Design containers ── */
-.design{display:none;min-height:100vh;position:relative}
-.design.active{display:block;animation:dFadeIn .5s ease both}
-@keyframes dFadeIn{from{opacity:0}to{opacity:1}}
-
-.wrap{width:min(1140px,90%);margin:0 auto}
-
-/* ── Shared founder grid ── */
-.founders-row{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-@media(max-width:800px){.founders-row{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:480px){.founders-row{grid-template-columns:1fr}}
-
-/* ── Shared section spacing ── */
-.sec{padding:80px 0}
-@media(max-width:640px){.sec{padding:56px 0}}
-
-/* ═══════════════════════════════════════
-   DESIGN 1 — "Warm Minimal"
-   Warm cream bg, clean serif hero, airy
-═══════════════════════════════════════ */
-.d1{background:#FAF7F2;color:#1a1815;font-family:'DM Sans',sans-serif}
-.d1 .hero1{
-  padding:120px 0 80px;
-  display:flex;flex-direction:column;align-items:center;text-align:center;
+/* ══════════════════════════════════════════
+   1 — "PAPER" 
+   Warm newsprint. Asymmetric editorial.
+   Big dramatic serif. Intentional roughness.
+══════════════════════════════════════════ */
+.d1{
+  background:#f1ece3;color:#1c1917;
+  font-family:'Newsreader',Georgia,serif;
+  background-image:url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
 }
-.d1 .hero1 .overline{
-  font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
-  color:#9c8b73;margin-bottom:24px;
+.d1 .mast{
+  padding:40px 6vw;display:flex;justify-content:space-between;align-items:baseline;
+  border-bottom:2px solid #1c1917;
 }
-.d1 .hero1 h1{
-  font-family:'Fraunces',serif;font-weight:700;
-  font-size:clamp(40px,7vw,80px);line-height:1.05;
-  max-width:800px;margin-bottom:24px;color:#1a1815;
+.d1 .mast-title{font-family:'Instrument Serif',serif;font-size:15px;letter-spacing:.02em}
+.d1 .mast-date{font-size:12px;color:#8a8078;letter-spacing:.06em;text-transform:uppercase}
+.d1 .hero-ed{
+  padding:80px 6vw 60px;
+  display:grid;grid-template-columns:1.4fr .6fr;gap:60px;align-items:end;
 }
-.d1 .hero1 p.sub{
-  font-size:18px;line-height:1.7;color:#6b6155;max-width:560px;
+.d1 .hero-ed h1{
+  font-family:'Instrument Serif',serif;font-weight:400;
+  font-size:clamp(52px,9vw,120px);line-height:.92;
+  letter-spacing:-.03em;
 }
-.d1 .divider{height:1px;background:#e4ddd3;margin:0 auto;width:80px}
-.d1 .about1{
-  display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;
+.d1 .hero-ed h1 em{font-style:italic;color:#a0522d}
+.d1 .hero-ed .aside{
+  font-size:16px;line-height:1.75;color:#5c554c;
+  border-left:1px solid #c4bdb3;padding-left:24px;
 }
-.d1 .about1 h2{font-family:'Fraunces',serif;font-size:32px;font-weight:500;margin-bottom:16px}
-.d1 .about1 p{font-size:16px;line-height:1.8;color:#5c5449}
-.d1 .f-card1{
-  background:#fff;border:1px solid #ebe6dc;border-radius:16px;
-  padding:40px 20px;text-align:center;
-  transition:box-shadow .3s ease,transform .3s ease;
+.d1 .rule{height:1px;background:#1c1917;margin:0 6vw}
+.d1 .rule.thin{background:#c4bdb3}
+.d1 .cols{
+  padding:48px 6vw;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:32px;
 }
-.d1 .f-card1:hover{box-shadow:0 20px 50px rgba(0,0,0,.06);transform:translateY(-4px)}
-.d1 .f-card1 .avatar{
-  width:64px;height:64px;border-radius:50%;margin:0 auto 16px;
-  background:linear-gradient(135deg,#e8dfd4,#d4c8b6);
-  display:flex;align-items:center;justify-content:center;
-  font-family:'Fraunces',serif;font-size:24px;color:#8a7a66;font-weight:700;
+.d1 .person{text-align:center;padding:40px 12px}
+.d1 .person .ini{
+  font-family:'Instrument Serif',serif;font-size:56px;line-height:1;
+  color:#a0522d;margin-bottom:8px;
 }
-.d1 .f-card1 .name{font-weight:600;font-size:18px;margin-bottom:4px}
-.d1 .f-card1 .role{font-size:13px;color:#9c8b73;letter-spacing:.04em}
-.d1 .values1{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
-.d1 .val-card{padding:24px;border-left:2px solid #d4c8b6}
-.d1 .val-card h3{font-size:16px;font-weight:600;margin-bottom:8px}
-.d1 .val-card p{font-size:14px;line-height:1.7;color:#6b6155}
-.d1 .cta1{
-  text-align:center;padding:80px 0 100px;
+.d1 .person .nm{font-weight:600;font-size:18px;margin-bottom:2px}
+.d1 .person .rl{font-size:13px;color:#8a8078;font-style:italic}
+.d1 .manifesto{
+  padding:60px 6vw;
+  display:grid;grid-template-columns:.4fr .6fr;gap:48px;
 }
-.d1 .cta1 h2{font-family:'Fraunces',serif;font-size:28px;margin-bottom:12px}
-.d1 .cta1 p{color:#6b6155;margin-bottom:24px}
-.d1 .cta1 a.btn{
-  display:inline-block;background:#1a1815;color:#FAF7F2;
-  padding:14px 32px;border-radius:999px;font-weight:600;font-size:14px;
-  text-decoration:none;transition:background .2s;
+.d1 .manifesto h2{
+  font-family:'Instrument Serif',serif;font-size:clamp(28px,4vw,48px);
+  font-weight:400;line-height:1.1;
 }
-.d1 .cta1 a.btn:hover{background:#3a3530}
+.d1 .manifesto .body{
+  column-count:2;column-gap:32px;
+  font-size:15px;line-height:1.85;color:#3d3832;
+}
+.d1 .foot{
+  padding:48px 6vw;border-top:2px solid #1c1917;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.d1 .foot a.link{
+  font-family:'Instrument Serif',serif;font-size:18px;
+  border-bottom:1px solid #1c1917;padding-bottom:2px;
+  transition:color .2s;
+}
+.d1 .foot a.link:hover{color:#a0522d}
 @media(max-width:800px){
-  .d1 .about1{grid-template-columns:1fr}
-  .d1 .values1{grid-template-columns:1fr}
+  .d1 .hero-ed{grid-template-columns:1fr;gap:32px}
+  .d1 .cols{grid-template-columns:repeat(2,1fr)}
+  .d1 .manifesto{grid-template-columns:1fr}
+  .d1 .manifesto .body{column-count:1}
 }
 
-/* ═══════════════════════════════════════
-   DESIGN 2 — "Midnight Gradient"
-   Dark with colorful gradient accents
-═══════════════════════════════════════ */
-.d2{background:#0c0c10;color:#eeedf5;font-family:'Sora',sans-serif}
-.d2 .hero2{
-  padding:140px 0 100px;position:relative;overflow:hidden;
+/* ══════════════════════════════════════════
+   2 — "SIGNAL"
+   Dense data aesthetic. Monospace. 
+   Neon chartreuse on near-black.
+   Grid of tight info blocks.
+══════════════════════════════════════════ */
+.d2{
+  background:#0e100e;color:#c8d6c0;
+  font-family:'Azeret Mono',monospace;
+  font-size:13px;line-height:1.6;
 }
-.d2 .hero2::before{
-  content:'';position:absolute;top:-200px;right:-200px;
-  width:700px;height:700px;border-radius:50%;
-  background:radial-gradient(circle,rgba(124,58,237,.3),transparent 70%);
-  pointer-events:none;
+.d2 .bar{
+  padding:16px 5vw;display:flex;justify-content:space-between;align-items:center;
+  border-bottom:1px solid #1e241e;
 }
-.d2 .hero2::after{
-  content:'';position:absolute;bottom:-300px;left:-100px;
-  width:600px;height:600px;border-radius:50%;
-  background:radial-gradient(circle,rgba(6,182,212,.25),transparent 70%);
-  pointer-events:none;
+.d2 .bar .logo{color:#d1ff73;font-weight:900;font-size:11px;letter-spacing:.15em;text-transform:uppercase}
+.d2 .bar .meta{color:#4a5548;font-size:11px}
+.d2 .splash{
+  padding:100px 5vw 80px;
+  position:relative;overflow:hidden;
 }
-.d2 .hero2 .inner{position:relative;z-index:1;max-width:720px}
-.d2 .hero2 .badge{
-  display:inline-block;padding:6px 16px;border-radius:999px;
-  border:1px solid rgba(124,58,237,.4);color:#a78bfa;
-  font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
-  margin-bottom:28px;
+.d2 .splash::after{
+  content:'IDC';position:absolute;right:-2vw;top:-30px;
+  font-family:'Unbounded',sans-serif;font-weight:900;
+  font-size:clamp(180px,28vw,380px);line-height:.85;
+  color:rgba(209,255,115,.04);pointer-events:none;
+  letter-spacing:-.04em;
 }
-.d2 .hero2 h1{
-  font-size:clamp(38px,6.5vw,72px);font-weight:800;line-height:1.05;
-  margin-bottom:24px;
-  background:linear-gradient(135deg,#fff 0%,#c4b5fd 50%,#67e8f9 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  background-clip:text;
+.d2 .splash h1{
+  font-family:'Unbounded',sans-serif;font-weight:900;
+  font-size:clamp(32px,5.5vw,64px);line-height:1;
+  color:#d1ff73;max-width:700px;position:relative;z-index:1;
+  margin-bottom:20px;letter-spacing:-.02em;
 }
-.d2 .hero2 p{font-size:18px;line-height:1.7;color:rgba(238,237,245,.6);max-width:540px}
-.d2 .stats2{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:20px;
+.d2 .splash p{max-width:480px;color:#6b7a63;position:relative;z-index:1}
+.d2 .grid4{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-top:1px solid #1e241e;
 }
-.d2 .stat2{
-  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
-  border-radius:20px;padding:28px 20px;text-align:center;
-  transition:border-color .3s,background .3s;
+.d2 .cell{
+  padding:32px 5vw 32px 24px;
+  border-right:1px solid #1e241e;border-bottom:1px solid #1e241e;
+  transition:background .25s;
 }
-.d2 .stat2:hover{border-color:rgba(124,58,237,.4);background:rgba(124,58,237,.06)}
-.d2 .stat2 .num{font-size:32px;font-weight:700;margin-bottom:4px;color:#c4b5fd}
-.d2 .stat2 .label{font-size:13px;color:rgba(238,237,245,.5)}
-.d2 .f-card2{
-  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
-  border-radius:20px;padding:36px 20px;text-align:center;
-  transition:border-color .3s,transform .3s;
+.d2 .cell:nth-child(4n){border-right:none}
+.d2 .cell:hover{background:rgba(209,255,115,.03)}
+.d2 .cell .tag{color:#d1ff73;font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+.d2 .cell .val{font-family:'Unbounded',sans-serif;font-size:28px;font-weight:700;color:#e8f0e0;margin-bottom:4px}
+.d2 .cell .desc{color:#4a5548;font-size:12px}
+.d2 .founders-strip{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-top:1px solid #1e241e;
 }
-.d2 .f-card2:hover{border-color:rgba(124,58,237,.4);transform:translateY(-4px)}
-.d2 .f-card2 .avatar{
-  width:56px;height:56px;border-radius:16px;margin:0 auto 16px;
-  background:linear-gradient(135deg,#7c3aed,#06b6d4);
-  display:flex;align-items:center;justify-content:center;
-  font-size:22px;font-weight:700;color:#fff;
+.d2 .f-cell{
+  padding:40px 24px;text-align:center;
+  border-right:1px solid #1e241e;
+  transition:background .25s;
 }
-.d2 .f-card2 .name{font-weight:600;font-size:17px;margin-bottom:4px}
-.d2 .f-card2 .role{font-size:13px;color:rgba(238,237,245,.45)}
-.d2 h2.sec-title{font-size:28px;font-weight:700;margin-bottom:40px}
-.d2 .mission2{
-  display:grid;grid-template-columns:1fr 1fr;gap:40px;
+.d2 .f-cell:last-child{border-right:none}
+.d2 .f-cell:hover{background:rgba(209,255,115,.04)}
+.d2 .f-cell .code{
+  display:inline-block;width:48px;height:48px;line-height:48px;
+  border:1px solid #2a322a;color:#d1ff73;font-weight:900;font-size:18px;
+  margin-bottom:12px;
 }
-.d2 .mission2 .m-card{
-  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);
-  border-radius:20px;padding:32px;
+.d2 .f-cell .nm{color:#e8f0e0;font-weight:700;font-size:14px;margin-bottom:2px}
+.d2 .f-cell .rl{color:#4a5548;font-size:11px}
+.d2 .block-text{
+  padding:60px 5vw;
+  display:grid;grid-template-columns:.35fr .65fr;gap:40px;
+  border-top:1px solid #1e241e;
 }
-.d2 .mission2 h3{font-size:18px;margin-bottom:12px;color:#c4b5fd}
-.d2 .mission2 p{font-size:15px;line-height:1.7;color:rgba(238,237,245,.55)}
-.d2 .cta2{
-  text-align:center;padding:80px 0 120px;
+.d2 .block-text h2{font-family:'Unbounded',sans-serif;font-size:20px;font-weight:700;color:#d1ff73}
+.d2 .block-text p{color:#6b7a63;font-size:13px;line-height:1.8}
+.d2 .foot2{
+  padding:24px 5vw;border-top:1px solid #1e241e;
+  display:flex;justify-content:space-between;align-items:center;
 }
-.d2 .cta2 a.btn{
-  display:inline-block;
-  background:linear-gradient(135deg,#7c3aed,#06b6d4);
-  color:#fff;padding:16px 36px;border-radius:999px;
-  font-weight:600;font-size:15px;text-decoration:none;
-  transition:opacity .2s;
-}
-.d2 .cta2 a.btn:hover{opacity:.85}
+.d2 .foot2 a{color:#d1ff73;border-bottom:1px solid #d1ff73;font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding-bottom:2px}
 @media(max-width:800px){
-  .d2 .stats2{grid-template-columns:repeat(2,1fr)}
-  .d2 .mission2{grid-template-columns:1fr}
+  .d2 .grid4,.d2 .founders-strip{grid-template-columns:repeat(2,1fr)}
+  .d2 .cell:nth-child(2n){border-right:none}
+  .d2 .f-cell:nth-child(2n){border-right:none}
+  .d2 .block-text{grid-template-columns:1fr}
 }
 
-/* ═══════════════════════════════════════
-   DESIGN 3 — "Glass & Light"
-   Soft gradient bg, frosted glass cards
-═══════════════════════════════════════ */
+/* ══════════════════════════════════════════
+   3 — "AURORA"  
+   Ethereal dark with organic color blobs.
+   Soft, rounded, airy. Humanist sans.
+══════════════════════════════════════════ */
 .d3{
-  background:#0f1729;color:#e8edf6;font-family:'DM Sans',sans-serif;
-  min-height:100vh;position:relative;
+  background:#0b0d13;color:#d8dce8;
+  font-family:'Cormorant Garamond',Georgia,serif;
+  position:relative;
 }
-.d3::before{
-  content:'';position:fixed;top:0;left:0;right:0;bottom:0;pointer-events:none;
-  background:
-    radial-gradient(800px 500px at 15% 20%,rgba(56,189,248,.18),transparent),
-    radial-gradient(600px 400px at 85% 60%,rgba(168,85,247,.15),transparent),
-    radial-gradient(500px 500px at 50% 90%,rgba(52,211,153,.1),transparent);
+.d3 .blobs{
+  position:fixed;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:0;
+  overflow:hidden;
 }
-.d3 .wrap{position:relative;z-index:1}
+.d3 .blob{
+  position:absolute;border-radius:50%;filter:blur(100px);
+  animation:drift 20s ease-in-out infinite alternate;
+}
+.d3 .blob.a{width:600px;height:600px;background:rgba(99,102,241,.15);top:-10%;left:-5%;animation-delay:0s}
+.d3 .blob.b{width:500px;height:500px;background:rgba(236,72,153,.12);bottom:10%;right:-5%;animation-delay:-7s}
+.d3 .blob.c{width:400px;height:400px;background:rgba(52,211,153,.1);top:40%;left:40%;animation-delay:-14s}
+@keyframes drift{
+  0%{transform:translate(0,0) scale(1)}
+  33%{transform:translate(30px,-40px) scale(1.05)}
+  66%{transform:translate(-20px,30px) scale(.95)}
+  100%{transform:translate(10px,-20px) scale(1.02)}
+}
+.d3 .inner{position:relative;z-index:1}
+.d3 .wrap3{width:min(1100px,90%);margin:0 auto}
 .d3 .hero3{
-  padding:130px 0 60px;text-align:center;
+  padding:140px 0 80px;text-align:center;
 }
-.d3 .hero3 .chip{
-  display:inline-block;padding:6px 18px;border-radius:999px;
-  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);
-  backdrop-filter:blur(8px);font-size:12px;font-weight:600;
-  letter-spacing:.12em;text-transform:uppercase;color:rgba(232,237,246,.6);
-  margin-bottom:28px;
+.d3 .hero3 .over{
+  font-size:14px;letter-spacing:.25em;text-transform:uppercase;
+  color:rgba(216,220,232,.35);margin-bottom:32px;
+  font-family:'Cormorant Garamond',serif;font-weight:600;
 }
 .d3 .hero3 h1{
-  font-size:clamp(36px,6vw,68px);font-weight:700;line-height:1.08;
-  margin-bottom:20px;max-width:700px;margin-left:auto;margin-right:auto;
+  font-weight:300;font-size:clamp(44px,8vw,96px);line-height:1;
+  letter-spacing:-.02em;margin-bottom:28px;
 }
-.d3 .hero3 p{font-size:18px;color:rgba(232,237,246,.55);max-width:520px;margin:0 auto;line-height:1.7}
-.d3 .glass{
-  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);
-  border-radius:24px;padding:32px;
-  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
-  box-shadow:0 20px 60px rgba(0,0,0,.25);
+.d3 .hero3 h1 em{font-style:italic;color:#a5b4fc}
+.d3 .hero3 p{
+  font-size:20px;color:rgba(216,220,232,.45);max-width:460px;margin:0 auto;
+  line-height:1.7;font-weight:300;
 }
-.d3 .glass-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.d3 .glass-stat{text-align:center;padding:24px}
-.d3 .glass-stat .big{font-size:36px;font-weight:700;color:#38bdf8}
-.d3 .glass-stat .lbl{font-size:13px;color:rgba(232,237,246,.5);margin-top:4px}
-.d3 h2.sec-title{font-size:28px;font-weight:700;margin-bottom:40px;text-align:center}
-.d3 .f-card3{
-  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
-  border-radius:20px;padding:36px 20px;text-align:center;
-  backdrop-filter:blur(12px);transition:transform .3s,border-color .3s;
+.d3 .orb-divider{
+  width:8px;height:8px;border-radius:50%;
+  background:rgba(165,180,252,.5);margin:60px auto;
+  box-shadow:0 0 30px rgba(165,180,252,.3);
 }
-.d3 .f-card3:hover{transform:translateY(-6px);border-color:rgba(56,189,248,.4)}
-.d3 .f-card3 .avatar{
-  width:60px;height:60px;border-radius:50%;margin:0 auto 16px;
-  background:linear-gradient(135deg,#38bdf8,#a855f7);
+.d3 .founders3{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:24px;
+  padding:0 0 80px;
+}
+.d3 .fc3{
+  text-align:center;padding:48px 20px;
+  border-radius:24px;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.06);
+  backdrop-filter:blur(12px);
+  transition:transform .4s cubic-bezier(.22,1,.36,1),border-color .4s;
+}
+.d3 .fc3:hover{transform:translateY(-8px);border-color:rgba(165,180,252,.25)}
+.d3 .fc3 .ava{
+  width:72px;height:72px;border-radius:50%;margin:0 auto 20px;
+  background:linear-gradient(135deg,rgba(99,102,241,.3),rgba(236,72,153,.2));
   display:flex;align-items:center;justify-content:center;
-  font-size:22px;font-weight:700;color:#fff;
+  font-size:28px;font-weight:300;color:#d8dce8;
+  border:1px solid rgba(255,255,255,.1);
 }
-.d3 .f-card3 .name{font-size:17px;font-weight:600;margin-bottom:4px}
-.d3 .f-card3 .role{font-size:13px;color:rgba(232,237,246,.45)}
-.d3 .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.d3 .pillar{
-  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
-  border-radius:20px;padding:28px;backdrop-filter:blur(8px);
+.d3 .fc3 .nm{font-size:22px;font-weight:400;margin-bottom:4px;letter-spacing:.02em}
+.d3 .fc3 .rl{font-size:14px;color:rgba(216,220,232,.35);font-style:italic}
+.d3 .philosophy{
+  padding:80px 0;text-align:center;
 }
-.d3 .pillar .icon{font-size:28px;margin-bottom:12px}
-.d3 .pillar h3{font-size:16px;font-weight:600;margin-bottom:8px}
-.d3 .pillar p{font-size:14px;color:rgba(232,237,246,.5);line-height:1.7}
-.d3 .cta3{text-align:center;padding:80px 0 120px}
-.d3 .cta3 a.btn{
-  display:inline-block;padding:16px 36px;border-radius:999px;
-  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);
-  backdrop-filter:blur(12px);color:#fff;font-weight:600;font-size:15px;
-  text-decoration:none;transition:background .2s;
+.d3 .philosophy blockquote{
+  font-size:clamp(24px,4vw,44px);font-weight:300;font-style:italic;
+  line-height:1.4;max-width:800px;margin:0 auto 40px;
+  color:rgba(216,220,232,.7);
 }
-.d3 .cta3 a.btn:hover{background:rgba(255,255,255,.2)}
+.d3 .philosophy .attr{font-size:14px;color:rgba(216,220,232,.3);letter-spacing:.1em;text-transform:uppercase}
+.d3 .pillars3{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
+  padding-bottom:80px;
+}
+.d3 .pill3{
+  padding:36px 28px;border-radius:20px;
+  background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);
+}
+.d3 .pill3 h3{font-size:20px;font-weight:400;margin-bottom:12px}
+.d3 .pill3 p{font-size:16px;line-height:1.7;color:rgba(216,220,232,.4);font-weight:300}
+.d3 .cta3{
+  text-align:center;padding:40px 0 120px;
+}
+.d3 .cta3 a{
+  display:inline-block;padding:16px 40px;border-radius:999px;
+  border:1px solid rgba(165,180,252,.3);color:#a5b4fc;
+  font-size:16px;font-weight:400;letter-spacing:.04em;
+  transition:all .3s;
+}
+.d3 .cta3 a:hover{background:rgba(165,180,252,.1);border-color:rgba(165,180,252,.5)}
 @media(max-width:800px){
-  .d3 .glass-grid,.d3 .pillars{grid-template-columns:1fr}
+  .d3 .founders3,.d3 .pillars3{grid-template-columns:1fr 1fr}
+}
+@media(max-width:500px){
+  .d3 .founders3,.d3 .pillars3{grid-template-columns:1fr}
 }
 
-/* ═══════════════════════════════════════
-   DESIGN 4 — "Terminal"
-   Hacker aesthetic, monospace, typing
-═══════════════════════════════════════ */
-.d4{background:#0a0e0a;color:#b8f0c8;font-family:'Space Mono',monospace}
-.d4 .scanlines{
-  position:fixed;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:0;
-  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.08) 2px,rgba(0,0,0,.08) 4px);
+/* ══════════════════════════════════════════
+   4 — "VAULT"
+   Black + brass. Architectural. Art-deco 
+   geometry. Sharp lines. Engraved feel.
+══════════════════════════════════════════ */
+.d4{
+  background:#08080a;color:#e8e0d0;
+  font-family:'Libre Baskerville',Georgia,serif;
 }
-.d4 .wrap{position:relative;z-index:1}
-.d4 .hero4{padding:100px 0 60px}
-.d4 .term-window{
-  background:#0d120d;border:1px solid rgba(100,255,160,.15);
-  border-radius:12px;overflow:hidden;
-  box-shadow:0 0 80px rgba(100,255,160,.06);
+.d4 .deco-line{
+  height:1px;
+  background:linear-gradient(90deg,transparent 0%,#b89b5e 15%,#b89b5e 85%,transparent 100%);
+  opacity:.3;
 }
-.d4 .term-bar{
-  display:flex;align-items:center;gap:8px;padding:12px 16px;
-  background:rgba(100,255,160,.05);border-bottom:1px solid rgba(100,255,160,.1);
+.d4 .nav4{
+  padding:28px 6vw;display:flex;justify-content:space-between;align-items:center;
 }
-.d4 .term-dot{width:12px;height:12px;border-radius:50%}
-.d4 .term-dot.r{background:#ff5f57}.d4 .term-dot.y{background:#febc2e}.d4 .term-dot.g{background:#28c840}
-.d4 .term-title{font-size:12px;color:rgba(184,240,200,.4);margin-left:8px}
-.d4 .term-body{padding:32px}
-.d4 .prompt{color:#64ffa0;font-size:13px}
-.d4 .hero4 h1{
-  font-size:clamp(28px,5vw,52px);font-weight:700;line-height:1.15;
-  margin:16px 0;color:#e0ffe8;
+.d4 .nav4 .mark{
+  font-size:11px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;
+  color:#b89b5e;
 }
-.d4 .cursor{
-  display:inline-block;width:10px;height:1.1em;background:#64ffa0;
-  margin-left:4px;vertical-align:text-bottom;
-  animation:blink 1s step-end infinite;
+.d4 .nav4 .tagline4{font-size:12px;color:rgba(232,224,208,.3);font-style:italic}
+.d4 .hero4{
+  padding:100px 6vw 80px;text-align:center;
+  position:relative;
 }
-@keyframes blink{50%{opacity:0}}
-.d4 .output{color:rgba(184,240,200,.6);font-size:14px;line-height:1.8;max-width:600px}
-.d4 h2.sec-title{font-size:20px;margin-bottom:32px;color:#64ffa0}
-.d4 .f-card4{
-  border:1px solid rgba(100,255,160,.12);border-radius:12px;
-  padding:28px 16px;text-align:center;
-  background:rgba(100,255,160,.03);transition:border-color .3s;
-}
-.d4 .f-card4:hover{border-color:rgba(100,255,160,.35)}
-.d4 .f-card4 .avatar{
-  width:52px;height:52px;border-radius:8px;margin:0 auto 14px;
-  border:1px solid rgba(100,255,160,.25);
-  display:flex;align-items:center;justify-content:center;
-  font-size:20px;font-weight:700;color:#64ffa0;
-}
-.d4 .f-card4 .name{font-size:15px;color:#e0ffe8;margin-bottom:4px}
-.d4 .f-card4 .role{font-size:12px;color:rgba(184,240,200,.4)}
-.d4 .log-section{
-  border:1px solid rgba(100,255,160,.1);border-radius:12px;
-  padding:24px;background:rgba(100,255,160,.02);
-}
-.d4 .log-entry{
-  padding:12px 0;border-bottom:1px solid rgba(100,255,160,.06);
-  display:flex;gap:12px;font-size:14px;
-}
-.d4 .log-entry:last-child{border-bottom:none}
-.d4 .log-entry .tag{color:#64ffa0;white-space:nowrap}
-.d4 .log-entry .msg{color:rgba(184,240,200,.6)}
-.d4 .cta4{text-align:center;padding:80px 0 120px}
-.d4 .cta4 a.btn{
-  display:inline-block;padding:14px 32px;border-radius:8px;
-  border:1px solid #64ffa0;color:#64ffa0;font-weight:700;font-size:14px;
-  text-decoration:none;transition:all .2s;
-}
-.d4 .cta4 a.btn:hover{background:#64ffa0;color:#0a0e0a}
-
-/* ═══════════════════════════════════════
-   DESIGN 5 — "Black & Gold"
-   Luxury, editorial, high contrast
-═══════════════════════════════════════ */
-.d5{background:#08080a;color:#f0ebe0;font-family:'DM Sans',sans-serif}
-.d5 .hero5{
-  padding:160px 0 100px;text-align:center;position:relative;
-}
-.d5 .hero5::before{
+.d4 .hero4::before{
   content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  width:500px;height:500px;border-radius:50%;
-  background:radial-gradient(circle,rgba(212,175,116,.12),transparent 70%);
+  width:360px;height:360px;
+  border:1px solid rgba(184,155,94,.1);border-radius:50%;
   pointer-events:none;
 }
-.d5 .hero5 .inner{position:relative;z-index:1}
-.d5 .hero5 .overline{
-  font-size:12px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;
-  color:#d4af74;margin-bottom:32px;
+.d4 .hero4::after{
+  content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(45deg);
+  width:260px;height:260px;
+  border:1px solid rgba(184,155,94,.08);
+  pointer-events:none;
+}
+.d4 .hero4 h1{
+  font-weight:400;font-size:clamp(40px,7vw,84px);line-height:1.05;
+  position:relative;z-index:1;
+}
+.d4 .hero4 h1 .gold{color:#b89b5e}
+.d4 .hero4 p{
+  margin-top:24px;font-size:17px;color:rgba(232,224,208,.45);
+  max-width:500px;margin-left:auto;margin-right:auto;
+  line-height:1.75;position:relative;z-index:1;
+}
+.d4 .founders4{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-top:1px solid rgba(184,155,94,.12);
+  border-bottom:1px solid rgba(184,155,94,.12);
+}
+.d4 .fd4{
+  padding:56px 24px;text-align:center;
+  border-right:1px solid rgba(184,155,94,.08);
+  transition:background .3s;
+  position:relative;
+}
+.d4 .fd4:last-child{border-right:none}
+.d4 .fd4:hover{background:rgba(184,155,94,.04)}
+.d4 .fd4 .mono{
+  font-size:40px;color:#b89b5e;margin-bottom:16px;
+  font-family:'Playfair Display',serif;font-weight:400;font-style:italic;
+}
+.d4 .fd4 .nm{font-size:18px;font-weight:700;letter-spacing:.06em;margin-bottom:4px}
+.d4 .fd4 .rl{font-size:12px;color:rgba(232,224,208,.3);letter-spacing:.12em;text-transform:uppercase}
+.d4 .tenets{
+  padding:80px 6vw;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  background:rgba(184,155,94,.08);
+}
+.d4 .tenet{
+  background:#08080a;padding:48px 32px;
+  transition:background .3s;
+}
+.d4 .tenet:hover{background:#0e0e12}
+.d4 .tenet .num{
+  font-family:'Playfair Display',serif;font-size:32px;font-style:italic;
+  color:#b89b5e;margin-bottom:16px;
+}
+.d4 .tenet h3{font-size:16px;font-weight:700;letter-spacing:.04em;margin-bottom:12px}
+.d4 .tenet p{font-size:14px;color:rgba(232,224,208,.4);line-height:1.8}
+.d4 .cta4{
+  text-align:center;padding:80px 6vw 120px;
+}
+.d4 .cta4 a{
+  display:inline-block;padding:18px 48px;
+  border:1px solid #b89b5e;color:#b89b5e;
+  font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  transition:all .3s;
+}
+.d4 .cta4 a:hover{background:#b89b5e;color:#08080a}
+@media(max-width:800px){
+  .d4 .founders4{grid-template-columns:repeat(2,1fr)}
+  .d4 .fd4:nth-child(2n){border-right:none}
+  .d4 .tenets{grid-template-columns:1fr}
+}
+
+/* ══════════════════════════════════════════
+   5 — "KINETIC"
+   White bg. Giant bold sans. Energetic.
+   Oversized type. Scrolling marquee.
+   Playful but purposeful.
+══════════════════════════════════════════ */
+.d5{
+  background:#fafafa;color:#111;
+  font-family:'Anybody',system-ui,sans-serif;
+}
+.d5 .hero5{
+  padding:120px 6vw 60px;
+  position:relative;overflow:hidden;
 }
 .d5 .hero5 h1{
-  font-family:'Fraunces',serif;font-weight:300;font-style:italic;
-  font-size:clamp(40px,7vw,86px);line-height:1.05;margin-bottom:24px;
-  color:#f0ebe0;
+  font-weight:900;font-size:clamp(48px,11vw,160px);
+  line-height:.88;letter-spacing:-.04em;
+  text-transform:uppercase;
 }
-.d5 .hero5 h1 em{font-style:normal;color:#d4af74}
-.d5 .hero5 p{font-size:18px;color:rgba(240,235,224,.5);max-width:500px;margin:0 auto;line-height:1.7}
-.d5 .gold-line{height:1px;background:linear-gradient(90deg,transparent,#d4af74,transparent);margin:0 auto;width:200px}
-.d5 h2.sec-title{
-  font-family:'Fraunces',serif;font-weight:300;font-size:32px;
-  margin-bottom:40px;text-align:center;
+.d5 .hero5 h1 .outline{
+  -webkit-text-stroke:2px #111;-webkit-text-fill-color:transparent;
 }
-.d5 .f-card5{
-  border:1px solid rgba(212,175,116,.2);border-radius:16px;
-  padding:40px 20px;text-align:center;
-  background:rgba(212,175,116,.03);transition:all .3s;
+.d5 .hero5 h1 .accent{color:#ff3d00}
+.d5 .hero5 p{
+  margin-top:28px;font-size:17px;font-weight:400;color:#666;
+  max-width:480px;line-height:1.7;
 }
-.d5 .f-card5:hover{border-color:rgba(212,175,116,.5);background:rgba(212,175,116,.06)}
-.d5 .f-card5 .avatar{
-  width:60px;height:60px;border-radius:50%;margin:0 auto 16px;
-  border:1px solid rgba(212,175,116,.35);
-  display:flex;align-items:center;justify-content:center;
-  font-family:'Fraunces',serif;font-size:24px;color:#d4af74;font-weight:500;
+.d5 .marquee-wrap{
+  overflow:hidden;padding:32px 0;border-top:2px solid #111;border-bottom:2px solid #111;
+  margin:40px 0;
 }
-.d5 .f-card5 .name{font-size:17px;font-weight:600;margin-bottom:4px;letter-spacing:.04em}
-.d5 .f-card5 .role{font-size:13px;color:rgba(240,235,224,.4);letter-spacing:.08em;text-transform:uppercase}
-.d5 .about5{
-  display:grid;grid-template-columns:1fr 1fr;gap:48px;
-  max-width:900px;margin:0 auto;
+.d5 .marquee{
+  display:flex;gap:48px;white-space:nowrap;
+  animation:scroll 18s linear infinite;
+  font-size:14px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:#999;
 }
-.d5 .about5 p{font-size:16px;line-height:1.8;color:rgba(240,235,224,.55)}
-.d5 .about5 .quote{
-  font-family:'Fraunces',serif;font-size:22px;font-style:italic;
-  color:#d4af74;line-height:1.6;
+.d5 .marquee .dot{color:#ff3d00}
+@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.d5 .founders5{
+  padding:60px 6vw;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:20px;
 }
-.d5 .cta5{text-align:center;padding:80px 0 120px}
-.d5 .cta5 a.btn{
-  display:inline-block;padding:16px 40px;border-radius:999px;
-  border:1px solid #d4af74;color:#d4af74;font-size:14px;
-  font-weight:600;letter-spacing:.08em;text-transform:uppercase;
-  text-decoration:none;transition:all .25s;
+.d5 .f5{
+  padding:48px 20px;text-align:center;
+  border:2px solid #eee;border-radius:20px;
+  transition:all .25s cubic-bezier(.22,1,.36,1);
+  position:relative;overflow:hidden;
 }
-.d5 .cta5 a.btn:hover{background:#d4af74;color:#08080a}
-@media(max-width:800px){.d5 .about5{grid-template-columns:1fr}}
+.d5 .f5::before{
+  content:'';position:absolute;inset:0;
+  background:#ff3d00;transform:translateY(100%);
+  transition:transform .35s cubic-bezier(.22,1,.36,1);
+  z-index:0;border-radius:18px;
+}
+.d5 .f5:hover::before{transform:translateY(0)}
+.d5 .f5:hover{border-color:#ff3d00;color:#fff}
+.d5 .f5 *{position:relative;z-index:1}
+.d5 .f5 .ini{
+  font-weight:900;font-size:48px;line-height:1;margin-bottom:12px;
+  text-transform:uppercase;
+}
+.d5 .f5 .nm{font-weight:700;font-size:18px;letter-spacing:.02em}
+.d5 .f5 .rl{font-size:12px;color:#999;margin-top:4px;font-weight:400;transition:color .3s}
+.d5 .f5:hover .rl{color:rgba(255,255,255,.7)}
+.d5 .manifesto5{
+  padding:80px 6vw;
+  display:grid;grid-template-columns:.5fr .5fr;gap:60px;
+  align-items:start;
+}
+.d5 .manifesto5 h2{
+  font-weight:900;font-size:clamp(28px,5vw,56px);
+  line-height:1;text-transform:uppercase;letter-spacing:-.02em;
+}
+.d5 .manifesto5 h2 .accent{color:#ff3d00}
+.d5 .manifesto5 .body5{font-size:16px;line-height:1.8;color:#555;font-weight:400}
+.d5 .cta5{
+  padding:60px 6vw 120px;text-align:center;
+}
+.d5 .cta5 a{
+  display:inline-block;padding:18px 48px;
+  background:#111;color:#fff;border-radius:999px;
+  font-weight:700;font-size:15px;letter-spacing:.04em;text-transform:uppercase;
+  transition:all .25s;
+}
+.d5 .cta5 a:hover{background:#ff3d00;transform:scale(1.05)}
+@media(max-width:800px){
+  .d5 .founders5,.d5 .manifesto5{grid-template-columns:1fr 1fr}
+}
+@media(max-width:500px){
+  .d5 .founders5{grid-template-columns:1fr}
+  .d5 .manifesto5{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
 
-<!-- ━━━━ DESIGN 1: Warm Minimal ━━━━ -->
+<!-- ━━━━ 1: PAPER ━━━━ -->
 <div class="design d1 active" id="d1">
-  <div class="wrap">
-    <div class="hero1">
-      <div class="overline">Impact · Deeptech · Collective</div>
-      <h1>Four founders building what matters.</h1>
-      <p class="sub">We're a small collective of deeptech founders aligned around a shared mission — build durable, science-backed companies that move society forward.</p>
+  <div class="mast">
+    <div class="mast-title">Impact Deeptech Collective</div>
+    <div class="mast-date">Est. 2025 · Four Founders</div>
+  </div>
+  <div class="hero-ed">
+    <h1>Building what <em>matters.</em></h1>
+    <div class="aside">
+      A small collective of deeptech founders aligned around a shared mission — build durable, science-backed companies that move society forward. Not hype. Not noise. Just hard, purposeful work.
     </div>
-
-    <div class="divider"></div>
-
-    <div class="sec about1">
-      <div>
-        <h2>Our Mission</h2>
-        <p>We champion deep technology that scales with integrity. Climate, energy, agriculture, human well-being — we look for systems-level solutions and invite only those who operate with uncommon rigor.</p>
-      </div>
-      <div>
-        <h2>How We Work</h2>
-        <p>We trade insights, share talent networks, and invest in each other's success. Small by design, built for trust, candor, and compounding impact over years — not quarters.</p>
-      </div>
+  </div>
+  <div class="rule"></div>
+  <div class="cols">
+    <div class="person"><div class="ini">K</div><div class="nm">Kenny</div><div class="rl">Founder</div></div>
+    <div class="person"><div class="ini">L</div><div class="nm">Lindsey</div><div class="rl">Founder</div></div>
+    <div class="person"><div class="ini">M</div><div class="nm">Michelle</div><div class="rl">Founder</div></div>
+    <div class="person"><div class="ini">P</div><div class="nm">Pete</div><div class="rl">Founder</div></div>
+  </div>
+  <div class="rule thin"></div>
+  <div class="manifesto">
+    <h2>We champion technology that scales with integrity.</h2>
+    <div class="body">
+      <p>Climate, energy, agriculture, human well-being — we look for systems-level solutions and invite only those who operate with uncommon rigor. We trade insights, share talent networks, and invest in each other's success.</p>
+      <p style="margin-top:16px">Small by design. Built for trust, candor, and compounding impact over years — not quarters. We believe the most important technologies of this decade will be both high-leverage and high-integrity.</p>
     </div>
-
-    <div class="sec">
-      <div class="founders-row">
-        <div class="f-card1">
-          <div class="avatar">K</div>
-          <div class="name">Kenny</div>
-          <div class="role">Founder</div>
-        </div>
-        <div class="f-card1">
-          <div class="avatar">L</div>
-          <div class="name">Lindsey</div>
-          <div class="role">Founder</div>
-        </div>
-        <div class="f-card1">
-          <div class="avatar">M</div>
-          <div class="name">Michelle</div>
-          <div class="role">Founder</div>
-        </div>
-        <div class="f-card1">
-          <div class="avatar">P</div>
-          <div class="name">Pete</div>
-          <div class="role">Founder</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="sec">
-      <div class="values1">
-        <div class="val-card">
-          <h3>Impact with Rigor</h3>
-          <p>Quantify outcomes, validate claims, and build for real-world adoption — not pitch decks.</p>
-        </div>
-        <div class="val-card">
-          <h3>Deeptech, Responsibly</h3>
-          <p>Advance frontier science with ethical guardrails and long-term stewardship.</p>
-        </div>
-        <div class="val-card">
-          <h3>Founder Collaboration</h3>
-          <p>Share networks, cross-pollinate ideas, and invest in each other's success.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="cta1">
-      <h2>Interested in connecting?</h2>
-      <p>We welcome thoughtful collaboration with aligned operators and partners.</p>
-      <a href="mailto:hello@example.com" class="btn">Get in touch</a>
-    </div>
+  </div>
+  <div class="rule"></div>
+  <div class="foot">
+    <span style="font-size:13px;color:#8a8078">Impact · Deeptech · Collective</span>
+    <a href="mailto:hello@example.com" class="link">Get in touch →</a>
   </div>
 </div>
 
-<!-- ━━━━ DESIGN 2: Midnight Gradient ━━━━ -->
+<!-- ━━━━ 2: SIGNAL ━━━━ -->
 <div class="design d2" id="d2">
-  <div class="wrap">
-    <div class="hero2">
-      <div class="inner">
-        <div class="badge">Impact × Deeptech</div>
-        <h1>Collective power for breakthrough impact.</h1>
-        <p>A founder coalition transforming frontier science into real-world systems change — across climate, energy, agriculture, and health.</p>
-      </div>
+  <div class="bar">
+    <div class="logo">IDC // Impact Deeptech Collective</div>
+    <div class="meta">SYS.ONLINE — 4 NODES ACTIVE</div>
+  </div>
+  <div class="splash">
+    <h1>Collective power for breakthrough impact.</h1>
+    <p>A founder coalition transforming frontier science into systems-level change across climate, energy, agriculture, and health.</p>
+  </div>
+  <div class="grid4">
+    <div class="cell"><div class="tag">Founders</div><div class="val">04</div><div class="desc">Active members</div></div>
+    <div class="cell"><div class="tag">Companies</div><div class="val">04</div><div class="desc">Deeptech ventures</div></div>
+    <div class="cell"><div class="tag">Alignment</div><div class="val">100%</div><div class="desc">Mission-driven</div></div>
+    <div class="cell"><div class="tag">Horizon</div><div class="val">∞</div><div class="desc">Long-term only</div></div>
+  </div>
+  <div class="founders-strip">
+    <div class="f-cell"><div class="code">K</div><div class="nm">Kenny</div><div class="rl">FOUNDER</div></div>
+    <div class="f-cell"><div class="code">L</div><div class="nm">Lindsey</div><div class="rl">FOUNDER</div></div>
+    <div class="f-cell"><div class="code">M</div><div class="nm">Michelle</div><div class="rl">FOUNDER</div></div>
+    <div class="f-cell"><div class="code">P</div><div class="nm">Pete</div><div class="rl">FOUNDER</div></div>
+  </div>
+  <div class="block-text">
+    <h2>Mission_</h2>
+    <div>
+      <p>We build asymmetric solutions — radical enough to matter, disciplined enough to scale. No hype cycles. Just hard science meeting real problems.</p>
+      <p style="margin-top:16px">Technology without purpose is complexity. We measure success by systems changed, lives improved, ecosystems restored.</p>
     </div>
-
-    <div class="sec">
-      <div class="stats2">
-        <div class="stat2"><div class="num">4</div><div class="label">Founders</div></div>
-        <div class="stat2"><div class="num">4</div><div class="label">Companies</div></div>
-        <div class="stat2"><div class="num">100%</div><div class="label">Mission-aligned</div></div>
-        <div class="stat2"><div class="num">∞</div><div class="label">Shared learnings</div></div>
-      </div>
-    </div>
-
-    <div class="sec">
-      <h2 class="sec-title">Founders</h2>
-      <div class="founders-row">
-        <div class="f-card2">
-          <div class="avatar">K</div>
-          <div class="name">Kenny</div>
-          <div class="role">Founder</div>
-        </div>
-        <div class="f-card2">
-          <div class="avatar">L</div>
-          <div class="name">Lindsey</div>
-          <div class="role">Founder</div>
-        </div>
-        <div class="f-card2">
-          <div class="avatar">M</div>
-          <div class="name">Michelle</div>
-          <div class="role">Founder</div>
-        </div>
-        <div class="f-card2">
-          <div class="avatar">P</div>
-          <div class="name">Pete</div>
-          <div class="role">Founder</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="sec">
-      <div class="mission2">
-        <div class="m-card">
-          <h3>🔬 Why Deeptech</h3>
-          <p>We build asymmetric solutions — radical enough to matter, disciplined enough to scale. No hype cycles, just hard science meeting real problems.</p>
-        </div>
-        <div class="m-card">
-          <h3>🌍 Why Impact</h3>
-          <p>Technology without purpose is just complexity. We measure success by systems changed, lives improved, and ecosystems restored.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="cta2">
-      <a href="mailto:hello@example.com" class="btn">Start a conversation →</a>
-    </div>
+  </div>
+  <div class="foot2">
+    <span style="color:#4a5548;font-size:11px">© IDC — ALL SYSTEMS NOMINAL</span>
+    <a href="mailto:hello@example.com">INIT_CONTACT →</a>
   </div>
 </div>
 
-<!-- ━━━━ DESIGN 3: Glass & Light ━━━━ -->
+<!-- ━━━━ 3: AURORA ━━━━ -->
 <div class="design d3" id="d3">
-  <div class="wrap">
-    <div class="hero3">
-      <div class="chip">Impact Deeptech Collective</div>
-      <h1>Transparent science. Responsible scale.</h1>
-      <p>A modern founder group aligning breakthrough technology with measurable human impact.</p>
-    </div>
-
-    <div class="sec" style="text-align:center">
-      <div class="glass" style="max-width:700px;margin:0 auto">
-        <div class="glass-grid">
-          <div class="glass-stat"><div class="big">4</div><div class="lbl">Founders</div></div>
-          <div class="glass-stat"><div class="big">4</div><div class="lbl">Deeptech Cos</div></div>
-          <div class="glass-stat"><div class="big">1</div><div class="lbl">Shared Mission</div></div>
-        </div>
+  <div class="blobs">
+    <div class="blob a"></div>
+    <div class="blob b"></div>
+    <div class="blob c"></div>
+  </div>
+  <div class="inner">
+    <div class="wrap3">
+      <div class="hero3">
+        <div class="over">Impact Deeptech Collective</div>
+        <h1>Where science meets <em>purpose.</em></h1>
+        <p>A small gathering of founders building durable, impact-driven deeptech companies — together.</p>
       </div>
-    </div>
 
-    <div class="sec">
-      <h2 class="sec-title">Founders</h2>
-      <div class="founders-row">
-        <div class="f-card3">
-          <div class="avatar">K</div>
-          <div class="name">Kenny</div>
-          <div class="role">Founder</div>
-        </div>
-        <div class="f-card3">
-          <div class="avatar">L</div>
-          <div class="name">Lindsey</div>
-          <div class="role">Founder</div>
-        </div>
-        <div class="f-card3">
-          <div class="avatar">M</div>
-          <div class="name">Michelle</div>
-          <div class="role">Founder</div>
-        </div>
-        <div class="f-card3">
-          <div class="avatar">P</div>
-          <div class="name">Pete</div>
-          <div class="role">Founder</div>
-        </div>
+      <div class="orb-divider"></div>
+
+      <div class="founders3">
+        <div class="fc3"><div class="ava">K</div><div class="nm">Kenny</div><div class="rl">Founder</div></div>
+        <div class="fc3"><div class="ava">L</div><div class="nm">Lindsey</div><div class="rl">Founder</div></div>
+        <div class="fc3"><div class="ava">M</div><div class="nm">Michelle</div><div class="rl">Founder</div></div>
+        <div class="fc3"><div class="ava">P</div><div class="nm">Pete</div><div class="rl">Founder</div></div>
       </div>
-    </div>
 
-    <div class="sec">
-      <h2 class="sec-title">What We Stand For</h2>
-      <div class="pillars">
-        <div class="pillar">
-          <div class="icon">⚡</div>
-          <h3>Impact with Rigor</h3>
-          <p>Quantify outcomes, validate claims, and build for real-world adoption.</p>
-        </div>
-        <div class="pillar">
-          <div class="icon">🧬</div>
-          <h3>Deeptech, Responsibly</h3>
-          <p>Advance frontier science with ethical guardrails and long-term stewardship.</p>
-        </div>
-        <div class="pillar">
-          <div class="icon">🤝</div>
-          <h3>Founder First</h3>
-          <p>Share networks, cross-pollinate ideas, and invest in each other's success.</p>
-        </div>
+      <div class="philosophy">
+        <blockquote>"The most important technologies of this decade will be both high-leverage and high-integrity."</blockquote>
+        <div class="attr">— Our Founding Belief</div>
       </div>
-    </div>
 
-    <div class="cta3">
-      <a href="mailto:hello@example.com" class="btn">Partner with us →</a>
+      <div class="pillars3">
+        <div class="pill3"><h3>Impact with Rigor</h3><p>Quantify outcomes, validate claims, and build for real-world adoption — not pitch decks.</p></div>
+        <div class="pill3"><h3>Deeptech, Responsibly</h3><p>Advance frontier science with ethical guardrails and long-term stewardship.</p></div>
+        <div class="pill3"><h3>Founder Collaboration</h3><p>Share networks, cross-pollinate ideas, and invest in each other's success.</p></div>
+      </div>
+
+      <div class="cta3">
+        <a href="mailto:hello@example.com">Connect with us →</a>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- ━━━━ DESIGN 4: Terminal ━━━━ -->
+<!-- ━━━━ 4: VAULT ━━━━ -->
 <div class="design d4" id="d4">
-  <div class="scanlines"></div>
-  <div class="wrap">
-    <div class="hero4">
-      <div class="term-window">
-        <div class="term-bar">
-          <span class="term-dot r"></span><span class="term-dot y"></span><span class="term-dot g"></span>
-          <span class="term-title">impact-deeptech-collective — bash</span>
-        </div>
-        <div class="term-body">
-          <div class="prompt">$ ./collective --init</div>
-          <h1>We build the future<br>that matters.<span class="cursor"></span></h1>
-          <div class="output">
-            Four founders. One mission. High-integrity deeptech reshaping climate, energy, agriculture, and health. Small by design. Built for trust.
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="sec">
-      <h2 class="sec-title">$ ls ./founders/</h2>
-      <div class="founders-row">
-        <div class="f-card4">
-          <div class="avatar">K</div>
-          <div class="name">Kenny</div>
-          <div class="role">./founders/kenny</div>
-        </div>
-        <div class="f-card4">
-          <div class="avatar">L</div>
-          <div class="name">Lindsey</div>
-          <div class="role">./founders/lindsey</div>
-        </div>
-        <div class="f-card4">
-          <div class="avatar">M</div>
-          <div class="name">Michelle</div>
-          <div class="role">./founders/michelle</div>
-        </div>
-        <div class="f-card4">
-          <div class="avatar">P</div>
-          <div class="name">Pete</div>
-          <div class="role">./founders/pete</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="sec">
-      <h2 class="sec-title">$ cat ./mission.log</h2>
-      <div class="log-section">
-        <div class="log-entry"><span class="tag">[CORE]</span><span class="msg">Impact measurement + validation at every stage</span></div>
-        <div class="log-entry"><span class="tag">[CORE]</span><span class="msg">Long-horizon founder capital — patient, accountable</span></div>
-        <div class="log-entry"><span class="tag">[CORE]</span><span class="msg">Ethics-first deployment of frontier technology</span></div>
-        <div class="log-entry"><span class="tag">[NET ]</span><span class="msg">Cross-pollinate talent, insights, and deal flow</span></div>
-        <div class="log-entry"><span class="tag">[NET ]</span><span class="msg">Shared conviction > shared capital</span></div>
-      </div>
-    </div>
-
-    <div class="cta4">
-      <a href="mailto:hello@example.com" class="btn">$ ./contact --init →</a>
-    </div>
+  <div class="nav4">
+    <div class="mark">Impact Deeptech Collective</div>
+    <div class="tagline4">Est. 2025</div>
+  </div>
+  <div class="deco-line"></div>
+  <div class="hero4">
+    <h1>Purpose meets <span class="gold">precision.</span></h1>
+    <p>A private collective of founders deploying elite deeptech to elevate humanity's most urgent systems.</p>
+  </div>
+  <div class="founders4">
+    <div class="fd4"><div class="mono">K</div><div class="nm">Kenny</div><div class="rl">Founder</div></div>
+    <div class="fd4"><div class="mono">L</div><div class="nm">Lindsey</div><div class="rl">Founder</div></div>
+    <div class="fd4"><div class="mono">M</div><div class="nm">Michelle</div><div class="rl">Founder</div></div>
+    <div class="fd4"><div class="mono">P</div><div class="nm">Pete</div><div class="rl">Founder</div></div>
+  </div>
+  <div class="tenets">
+    <div class="tenet"><div class="num">I</div><h3>Impact with Rigor</h3><p>Quantify outcomes, validate claims, and build for real-world adoption. Conviction backed by evidence.</p></div>
+    <div class="tenet"><div class="num">II</div><h3>Deeptech, Responsibly</h3><p>Advance frontier science with ethical guardrails and long-term stewardship. No shortcuts.</p></div>
+    <div class="tenet"><div class="num">III</div><h3>Founder Alliance</h3><p>Share networks, cross-pollinate ideas, and invest in each other's enduring success.</p></div>
+  </div>
+  <div class="cta4">
+    <a href="mailto:hello@example.com">Request Introduction</a>
   </div>
 </div>
 
-<!-- ━━━━ DESIGN 5: Black & Gold ━━━━ -->
+<!-- ━━━━ 5: KINETIC ━━━━ -->
 <div class="design d5" id="d5">
-  <div class="wrap">
-    <div class="hero5">
-      <div class="inner">
-        <div class="overline">Impact Deeptech Collective</div>
-        <h1>Purpose meets <em>precision.</em></h1>
-        <p>A private collective of founders deploying elite deeptech to elevate humanity's most urgent systems.</p>
-      </div>
+  <div class="hero5">
+    <h1><span class="outline">Impact</span><br><span class="accent">Deep</span>tech<br>Collective</h1>
+    <p>Four founders. One mission. Building science-backed companies that move society forward — with rigor, speed, and uncommon ambition.</p>
+  </div>
+  <div class="marquee-wrap">
+    <div class="marquee">
+      <span>Climate <span class="dot">●</span> Energy <span class="dot">●</span> Agriculture <span class="dot">●</span> Health <span class="dot">●</span> Impact <span class="dot">●</span> Deeptech <span class="dot">●</span> Founders <span class="dot">●</span> Collective</span>
+      <span>Climate <span class="dot">●</span> Energy <span class="dot">●</span> Agriculture <span class="dot">●</span> Health <span class="dot">●</span> Impact <span class="dot">●</span> Deeptech <span class="dot">●</span> Founders <span class="dot">●</span> Collective</span>
     </div>
-
-    <div class="gold-line"></div>
-
-    <div class="sec">
-      <h2 class="sec-title">The Founders</h2>
-      <div class="founders-row">
-        <div class="f-card5">
-          <div class="avatar">K</div>
-          <div class="name">Kenny</div>
-          <div class="role">Founder</div>
-        </div>
-        <div class="f-card5">
-          <div class="avatar">L</div>
-          <div class="name">Lindsey</div>
-          <div class="role">Founder</div>
-        </div>
-        <div class="f-card5">
-          <div class="avatar">M</div>
-          <div class="name">Michelle</div>
-          <div class="role">Founder</div>
-        </div>
-        <div class="f-card5">
-          <div class="avatar">P</div>
-          <div class="name">Pete</div>
-          <div class="role">Founder</div>
-        </div>
-      </div>
+  </div>
+  <div class="founders5">
+    <div class="f5"><div class="ini">K</div><div class="nm">Kenny</div><div class="rl">Founder</div></div>
+    <div class="f5"><div class="ini">L</div><div class="nm">Lindsey</div><div class="rl">Founder</div></div>
+    <div class="f5"><div class="ini">M</div><div class="nm">Michelle</div><div class="rl">Founder</div></div>
+    <div class="f5"><div class="ini">P</div><div class="nm">Pete</div><div class="rl">Founder</div></div>
+  </div>
+  <div class="manifesto5">
+    <h2>We build what <span class="accent">matters.</span></h2>
+    <div class="body5">
+      <p>We champion deep technology that scales with integrity, valuing long-term outcomes over short-term noise. Climate, energy, agriculture, human well-being — we look for systems-level solutions.</p>
+      <p style="margin-top:16px">Small by design. Built for trust, candor, and compounding impact over years — not quarters.</p>
     </div>
-
-    <div class="gold-line"></div>
-
-    <div class="sec">
-      <div class="about5">
-        <div class="quote">"The most important technologies of this decade will be both high-leverage and high-integrity."</div>
-        <div>
-          <p>We are four founders from impact-driven deeptech companies, aligned around building durable solutions in climate, energy, agriculture, and human well-being.</p>
-          <p style="margin-top:16px">We collaborate across ideas, talent, and capital to accelerate responsible innovation. Invitations are limited. Trust is everything.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="cta5">
-      <a href="mailto:hello@example.com" class="btn">Request Introduction</a>
-    </div>
+  </div>
+  <div class="cta5">
+    <a href="mailto:hello@example.com">Let's Talk →</a>
   </div>
 </div>
 
-<!-- ━━━━ Theme Switcher ━━━━ -->
-<nav class="theme-switcher">
-  <button class="sw-arrow" id="sw-prev">‹</button>
-  <span class="sw-label">Design</span>
-  <button class="sw-dot active" data-i="0">1</button>
-  <button class="sw-dot" data-i="1">2</button>
-  <button class="sw-dot" data-i="2">3</button>
-  <button class="sw-dot" data-i="3">4</button>
-  <button class="sw-dot" data-i="4">5</button>
-  <button class="sw-arrow" id="sw-next">›</button>
+<!-- ━━━━ Switcher ━━━━ -->
+<nav class="switcher">
+  <button class="sw-nav" id="sw-prev">‹</button>
+  <button class="sw-btn on" data-i="0">1</button>
+  <button class="sw-btn" data-i="1">2</button>
+  <button class="sw-btn" data-i="2">3</button>
+  <button class="sw-btn" data-i="3">4</button>
+  <button class="sw-btn" data-i="4">5</button>
+  <button class="sw-nav" id="sw-next">›</button>
 </nav>
 
 <script>
 (function(){
-  const designs = document.querySelectorAll('.design');
-  const dots = document.querySelectorAll('.sw-dot');
-  let cur = 0;
-
+  const designs=document.querySelectorAll('.design');
+  const dots=document.querySelectorAll('.sw-btn');
+  let cur=0;
   function go(i){
-    i = ((i % designs.length) + designs.length) % designs.length;
+    i=((i%designs.length)+designs.length)%designs.length;
     designs[cur].classList.remove('active');
-    dots[cur].classList.remove('active');
-    cur = i;
+    dots[cur].classList.remove('on');
+    cur=i;
     designs[cur].classList.add('active');
-    dots[cur].classList.add('active');
-    window.scrollTo({top:0,behavior:'smooth'});
+    dots[cur].classList.add('on');
+    window.scrollTo({top:0,behavior:'instant'});
   }
-
-  dots.forEach(d => d.addEventListener('click', () => go(+d.dataset.i)));
-  document.getElementById('sw-prev').addEventListener('click', () => go(cur - 1));
-  document.getElementById('sw-next').addEventListener('click', () => go(cur + 1));
-
-  // Keyboard nav
-  document.addEventListener('keydown', e => {
-    if(e.key === 'ArrowRight') go(cur + 1);
-    if(e.key === 'ArrowLeft') go(cur - 1);
+  dots.forEach(d=>d.addEventListener('click',()=>go(+d.dataset.i)));
+  document.getElementById('sw-prev').addEventListener('click',()=>go(cur-1));
+  document.getElementById('sw-next').addEventListener('click',()=>go(cur+1));
+  document.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight')go(cur+1);
+    if(e.key==='ArrowLeft')go(cur-1);
   });
 })();
 </script>
