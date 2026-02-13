@@ -1,785 +1,792 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Impact Deeptech Collective — 5 Design Variations</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;800&family=Source+Serif+4:wght@300;400;600&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;600&family=Manrope:wght@300;400;500;600;700&display=swap');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Impact Deeptech Collective</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Serif+Display&family=Space+Mono:wght@400;700&family=Sora:wght@300;400;500;600;700;800&family=Fraunces:ital,wght@0,300;0,500;0,700;0,900;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 
-    :root {
-      --transition: 600ms ease;
-      --shadow-lg: 0 30px 80px rgba(0,0,0,0.35);
-      --shadow-md: 0 20px 50px rgba(0,0,0,0.2);
-    }
+/* ── Switcher (always visible) ── */
+.theme-switcher{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9999;
+  display:flex;align-items:center;gap:6px;
+  padding:6px 8px;border-radius:60px;
+  background:rgba(0,0,0,.75);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 8px 32px rgba(0,0,0,.4);
+  font-family:'DM Sans',system-ui,sans-serif;
+}
+.theme-switcher .sw-label{
+  font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  color:rgba(255,255,255,.5);padding:0 8px;white-space:nowrap;
+}
+.theme-switcher button{
+  border:none;cursor:pointer;font-family:inherit;
+  transition:all .25s ease;
+}
+.theme-switcher .sw-dot{
+  width:36px;height:36px;border-radius:50%;
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:600;color:rgba(255,255,255,.55);
+  background:rgba(255,255,255,.08);
+}
+.theme-switcher .sw-dot:hover{background:rgba(255,255,255,.16);color:#fff}
+.theme-switcher .sw-dot.active{background:#fff;color:#000}
+.theme-switcher .sw-arrow{
+  width:32px;height:32px;border-radius:50%;
+  display:inline-flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.06);color:rgba(255,255,255,.6);font-size:16px;
+}
+.theme-switcher .sw-arrow:hover{background:rgba(255,255,255,.14);color:#fff}
 
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, sans-serif;
-      color: #111;
-      background: #f4f2ee;
-      transition: background var(--transition), color var(--transition);
-    }
+/* ── Design containers ── */
+.design{display:none;min-height:100vh;position:relative}
+.design.active{display:block;animation:dFadeIn .5s ease both}
+@keyframes dFadeIn{from{opacity:0}to{opacity:1}}
 
-    a { color: inherit; text-decoration: none; }
+.wrap{width:min(1140px,90%);margin:0 auto}
 
-    .page {
-      position: relative;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
+/* ── Shared founder grid ── */
+.founders-row{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+@media(max-width:800px){.founders-row{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.founders-row{grid-template-columns:1fr}}
 
-    .design {
-      display: none;
-      opacity: 0;
-      animation: fadeIn 700ms ease forwards;
-    }
-    .design.active { display: block; }
+/* ── Shared section spacing ── */
+.sec{padding:80px 0}
+@media(max-width:640px){.sec{padding:56px 0}}
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(16px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+/* ═══════════════════════════════════════
+   DESIGN 1 — "Warm Minimal"
+   Warm cream bg, clean serif hero, airy
+═══════════════════════════════════════ */
+.d1{background:#FAF7F2;color:#1a1815;font-family:'DM Sans',sans-serif}
+.d1 .hero1{
+  padding:120px 0 80px;
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+}
+.d1 .hero1 .overline{
+  font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  color:#9c8b73;margin-bottom:24px;
+}
+.d1 .hero1 h1{
+  font-family:'Fraunces',serif;font-weight:700;
+  font-size:clamp(40px,7vw,80px);line-height:1.05;
+  max-width:800px;margin-bottom:24px;color:#1a1815;
+}
+.d1 .hero1 p.sub{
+  font-size:18px;line-height:1.7;color:#6b6155;max-width:560px;
+}
+.d1 .divider{height:1px;background:#e4ddd3;margin:0 auto;width:80px}
+.d1 .about1{
+  display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;
+}
+.d1 .about1 h2{font-family:'Fraunces',serif;font-size:32px;font-weight:500;margin-bottom:16px}
+.d1 .about1 p{font-size:16px;line-height:1.8;color:#5c5449}
+.d1 .f-card1{
+  background:#fff;border:1px solid #ebe6dc;border-radius:16px;
+  padding:40px 20px;text-align:center;
+  transition:box-shadow .3s ease,transform .3s ease;
+}
+.d1 .f-card1:hover{box-shadow:0 20px 50px rgba(0,0,0,.06);transform:translateY(-4px)}
+.d1 .f-card1 .avatar{
+  width:64px;height:64px;border-radius:50%;margin:0 auto 16px;
+  background:linear-gradient(135deg,#e8dfd4,#d4c8b6);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Fraunces',serif;font-size:24px;color:#8a7a66;font-weight:700;
+}
+.d1 .f-card1 .name{font-weight:600;font-size:18px;margin-bottom:4px}
+.d1 .f-card1 .role{font-size:13px;color:#9c8b73;letter-spacing:.04em}
+.d1 .values1{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.d1 .val-card{padding:24px;border-left:2px solid #d4c8b6}
+.d1 .val-card h3{font-size:16px;font-weight:600;margin-bottom:8px}
+.d1 .val-card p{font-size:14px;line-height:1.7;color:#6b6155}
+.d1 .cta1{
+  text-align:center;padding:80px 0 100px;
+}
+.d1 .cta1 h2{font-family:'Fraunces',serif;font-size:28px;margin-bottom:12px}
+.d1 .cta1 p{color:#6b6155;margin-bottom:24px}
+.d1 .cta1 a.btn{
+  display:inline-block;background:#1a1815;color:#FAF7F2;
+  padding:14px 32px;border-radius:999px;font-weight:600;font-size:14px;
+  text-decoration:none;transition:background .2s;
+}
+.d1 .cta1 a.btn:hover{background:#3a3530}
+@media(max-width:800px){
+  .d1 .about1{grid-template-columns:1fr}
+  .d1 .values1{grid-template-columns:1fr}
+}
 
-    .switcher {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 2000;
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      background: rgba(255,255,255,0.9);
-      border: 1px solid rgba(0,0,0,0.08);
-      border-radius: 999px;
-      padding: 8px 12px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-      backdrop-filter: blur(10px);
-    }
+/* ═══════════════════════════════════════
+   DESIGN 2 — "Midnight Gradient"
+   Dark with colorful gradient accents
+═══════════════════════════════════════ */
+.d2{background:#0c0c10;color:#eeedf5;font-family:'Sora',sans-serif}
+.d2 .hero2{
+  padding:140px 0 100px;position:relative;overflow:hidden;
+}
+.d2 .hero2::before{
+  content:'';position:absolute;top:-200px;right:-200px;
+  width:700px;height:700px;border-radius:50%;
+  background:radial-gradient(circle,rgba(124,58,237,.3),transparent 70%);
+  pointer-events:none;
+}
+.d2 .hero2::after{
+  content:'';position:absolute;bottom:-300px;left:-100px;
+  width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(6,182,212,.25),transparent 70%);
+  pointer-events:none;
+}
+.d2 .hero2 .inner{position:relative;z-index:1;max-width:720px}
+.d2 .hero2 .badge{
+  display:inline-block;padding:6px 16px;border-radius:999px;
+  border:1px solid rgba(124,58,237,.4);color:#a78bfa;
+  font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  margin-bottom:28px;
+}
+.d2 .hero2 h1{
+  font-size:clamp(38px,6.5vw,72px);font-weight:800;line-height:1.05;
+  margin-bottom:24px;
+  background:linear-gradient(135deg,#fff 0%,#c4b5fd 50%,#67e8f9 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.d2 .hero2 p{font-size:18px;line-height:1.7;color:rgba(238,237,245,.6);max-width:540px}
+.d2 .stats2{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:20px;
+}
+.d2 .stat2{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  border-radius:20px;padding:28px 20px;text-align:center;
+  transition:border-color .3s,background .3s;
+}
+.d2 .stat2:hover{border-color:rgba(124,58,237,.4);background:rgba(124,58,237,.06)}
+.d2 .stat2 .num{font-size:32px;font-weight:700;margin-bottom:4px;color:#c4b5fd}
+.d2 .stat2 .label{font-size:13px;color:rgba(238,237,245,.5)}
+.d2 .f-card2{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  border-radius:20px;padding:36px 20px;text-align:center;
+  transition:border-color .3s,transform .3s;
+}
+.d2 .f-card2:hover{border-color:rgba(124,58,237,.4);transform:translateY(-4px)}
+.d2 .f-card2 .avatar{
+  width:56px;height:56px;border-radius:16px;margin:0 auto 16px;
+  background:linear-gradient(135deg,#7c3aed,#06b6d4);
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;font-weight:700;color:#fff;
+}
+.d2 .f-card2 .name{font-weight:600;font-size:17px;margin-bottom:4px}
+.d2 .f-card2 .role{font-size:13px;color:rgba(238,237,245,.45)}
+.d2 h2.sec-title{font-size:28px;font-weight:700;margin-bottom:40px}
+.d2 .mission2{
+  display:grid;grid-template-columns:1fr 1fr;gap:40px;
+}
+.d2 .mission2 .m-card{
+  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);
+  border-radius:20px;padding:32px;
+}
+.d2 .mission2 h3{font-size:18px;margin-bottom:12px;color:#c4b5fd}
+.d2 .mission2 p{font-size:15px;line-height:1.7;color:rgba(238,237,245,.55)}
+.d2 .cta2{
+  text-align:center;padding:80px 0 120px;
+}
+.d2 .cta2 a.btn{
+  display:inline-block;
+  background:linear-gradient(135deg,#7c3aed,#06b6d4);
+  color:#fff;padding:16px 36px;border-radius:999px;
+  font-weight:600;font-size:15px;text-decoration:none;
+  transition:opacity .2s;
+}
+.d2 .cta2 a.btn:hover{opacity:.85}
+@media(max-width:800px){
+  .d2 .stats2{grid-template-columns:repeat(2,1fr)}
+  .d2 .mission2{grid-template-columns:1fr}
+}
 
-    .switcher button {
-      border: 0;
-      background: transparent;
-      padding: 6px 10px;
-      border-radius: 999px;
-      font-size: 12px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      cursor: pointer;
-      color: #111;
-      font-weight: 600;
-    }
+/* ═══════════════════════════════════════
+   DESIGN 3 — "Glass & Light"
+   Soft gradient bg, frosted glass cards
+═══════════════════════════════════════ */
+.d3{
+  background:#0f1729;color:#e8edf6;font-family:'DM Sans',sans-serif;
+  min-height:100vh;position:relative;
+}
+.d3::before{
+  content:'';position:fixed;top:0;left:0;right:0;bottom:0;pointer-events:none;
+  background:
+    radial-gradient(800px 500px at 15% 20%,rgba(56,189,248,.18),transparent),
+    radial-gradient(600px 400px at 85% 60%,rgba(168,85,247,.15),transparent),
+    radial-gradient(500px 500px at 50% 90%,rgba(52,211,153,.1),transparent);
+}
+.d3 .wrap{position:relative;z-index:1}
+.d3 .hero3{
+  padding:130px 0 60px;text-align:center;
+}
+.d3 .hero3 .chip{
+  display:inline-block;padding:6px 18px;border-radius:999px;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);
+  backdrop-filter:blur(8px);font-size:12px;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;color:rgba(232,237,246,.6);
+  margin-bottom:28px;
+}
+.d3 .hero3 h1{
+  font-size:clamp(36px,6vw,68px);font-weight:700;line-height:1.08;
+  margin-bottom:20px;max-width:700px;margin-left:auto;margin-right:auto;
+}
+.d3 .hero3 p{font-size:18px;color:rgba(232,237,246,.55);max-width:520px;margin:0 auto;line-height:1.7}
+.d3 .glass{
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);
+  border-radius:24px;padding:32px;
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+.d3 .glass-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.d3 .glass-stat{text-align:center;padding:24px}
+.d3 .glass-stat .big{font-size:36px;font-weight:700;color:#38bdf8}
+.d3 .glass-stat .lbl{font-size:13px;color:rgba(232,237,246,.5);margin-top:4px}
+.d3 h2.sec-title{font-size:28px;font-weight:700;margin-bottom:40px;text-align:center}
+.d3 .f-card3{
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  border-radius:20px;padding:36px 20px;text-align:center;
+  backdrop-filter:blur(12px);transition:transform .3s,border-color .3s;
+}
+.d3 .f-card3:hover{transform:translateY(-6px);border-color:rgba(56,189,248,.4)}
+.d3 .f-card3 .avatar{
+  width:60px;height:60px;border-radius:50%;margin:0 auto 16px;
+  background:linear-gradient(135deg,#38bdf8,#a855f7);
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;font-weight:700;color:#fff;
+}
+.d3 .f-card3 .name{font-size:17px;font-weight:600;margin-bottom:4px}
+.d3 .f-card3 .role{font-size:13px;color:rgba(232,237,246,.45)}
+.d3 .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.d3 .pillar{
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+  border-radius:20px;padding:28px;backdrop-filter:blur(8px);
+}
+.d3 .pillar .icon{font-size:28px;margin-bottom:12px}
+.d3 .pillar h3{font-size:16px;font-weight:600;margin-bottom:8px}
+.d3 .pillar p{font-size:14px;color:rgba(232,237,246,.5);line-height:1.7}
+.d3 .cta3{text-align:center;padding:80px 0 120px}
+.d3 .cta3 a.btn{
+  display:inline-block;padding:16px 36px;border-radius:999px;
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);
+  backdrop-filter:blur(12px);color:#fff;font-weight:600;font-size:15px;
+  text-decoration:none;transition:background .2s;
+}
+.d3 .cta3 a.btn:hover{background:rgba(255,255,255,.2)}
+@media(max-width:800px){
+  .d3 .glass-grid,.d3 .pillars{grid-template-columns:1fr}
+}
 
-    .switcher .dots {
-      display: flex;
-      gap: 6px;
-      padding: 0 6px;
-    }
+/* ═══════════════════════════════════════
+   DESIGN 4 — "Terminal"
+   Hacker aesthetic, monospace, typing
+═══════════════════════════════════════ */
+.d4{background:#0a0e0a;color:#b8f0c8;font-family:'Space Mono',monospace}
+.d4 .scanlines{
+  position:fixed;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.08) 2px,rgba(0,0,0,.08) 4px);
+}
+.d4 .wrap{position:relative;z-index:1}
+.d4 .hero4{padding:100px 0 60px}
+.d4 .term-window{
+  background:#0d120d;border:1px solid rgba(100,255,160,.15);
+  border-radius:12px;overflow:hidden;
+  box-shadow:0 0 80px rgba(100,255,160,.06);
+}
+.d4 .term-bar{
+  display:flex;align-items:center;gap:8px;padding:12px 16px;
+  background:rgba(100,255,160,.05);border-bottom:1px solid rgba(100,255,160,.1);
+}
+.d4 .term-dot{width:12px;height:12px;border-radius:50%}
+.d4 .term-dot.r{background:#ff5f57}.d4 .term-dot.y{background:#febc2e}.d4 .term-dot.g{background:#28c840}
+.d4 .term-title{font-size:12px;color:rgba(184,240,200,.4);margin-left:8px}
+.d4 .term-body{padding:32px}
+.d4 .prompt{color:#64ffa0;font-size:13px}
+.d4 .hero4 h1{
+  font-size:clamp(28px,5vw,52px);font-weight:700;line-height:1.15;
+  margin:16px 0;color:#e0ffe8;
+}
+.d4 .cursor{
+  display:inline-block;width:10px;height:1.1em;background:#64ffa0;
+  margin-left:4px;vertical-align:text-bottom;
+  animation:blink 1s step-end infinite;
+}
+@keyframes blink{50%{opacity:0}}
+.d4 .output{color:rgba(184,240,200,.6);font-size:14px;line-height:1.8;max-width:600px}
+.d4 h2.sec-title{font-size:20px;margin-bottom:32px;color:#64ffa0}
+.d4 .f-card4{
+  border:1px solid rgba(100,255,160,.12);border-radius:12px;
+  padding:28px 16px;text-align:center;
+  background:rgba(100,255,160,.03);transition:border-color .3s;
+}
+.d4 .f-card4:hover{border-color:rgba(100,255,160,.35)}
+.d4 .f-card4 .avatar{
+  width:52px;height:52px;border-radius:8px;margin:0 auto 14px;
+  border:1px solid rgba(100,255,160,.25);
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;font-weight:700;color:#64ffa0;
+}
+.d4 .f-card4 .name{font-size:15px;color:#e0ffe8;margin-bottom:4px}
+.d4 .f-card4 .role{font-size:12px;color:rgba(184,240,200,.4)}
+.d4 .log-section{
+  border:1px solid rgba(100,255,160,.1);border-radius:12px;
+  padding:24px;background:rgba(100,255,160,.02);
+}
+.d4 .log-entry{
+  padding:12px 0;border-bottom:1px solid rgba(100,255,160,.06);
+  display:flex;gap:12px;font-size:14px;
+}
+.d4 .log-entry:last-child{border-bottom:none}
+.d4 .log-entry .tag{color:#64ffa0;white-space:nowrap}
+.d4 .log-entry .msg{color:rgba(184,240,200,.6)}
+.d4 .cta4{text-align:center;padding:80px 0 120px}
+.d4 .cta4 a.btn{
+  display:inline-block;padding:14px 32px;border-radius:8px;
+  border:1px solid #64ffa0;color:#64ffa0;font-weight:700;font-size:14px;
+  text-decoration:none;transition:all .2s;
+}
+.d4 .cta4 a.btn:hover{background:#64ffa0;color:#0a0e0a}
 
-    .switcher .dot {
-      width: 26px;
-      height: 26px;
-      border-radius: 999px;
-      border: 1px solid rgba(0,0,0,0.15);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      cursor: pointer;
-      background: #fff;
-      color: #111;
-    }
-    .switcher .dot.active {
-      background: #111;
-      color: #fff;
-    }
-
-    /* Shared utility */
-    .container {
-      width: min(1200px, 92%);
-      margin: 0 auto;
-    }
-
-    .section-title {
-      font-size: clamp(22px, 3vw, 34px);
-      margin-bottom: 16px;
-    }
-
-    .founder-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-    }
-
-    .cta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      padding: 28px;
-      border-radius: 20px;
-    }
-
-    @media (max-width: 960px) {
-      .founder-grid { grid-template-columns: repeat(2, 1fr); }
-      .cta { flex-direction: column; align-items: flex-start; }
-    }
-
-    @media (max-width: 640px) {
-      .founder-grid { grid-template-columns: 1fr; }
-      .switcher { left: 50%; right: auto; transform: translateX(-50%); }
-    }
-
-    /* =====================
-       1. Minimal Editorial
-    ======================*/
-    .theme-1 body,
-    body.theme-1 { background: #f7f4ef; color: #1c1a17; }
-    .design-1 { font-family: "Source Serif 4", Georgia, serif; }
-    .design-1 .hero {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 40px;
-      padding: 80px 0 40px;
-      align-items: center;
-    }
-    .design-1 .hero h1 {
-      font-family: "Playfair Display", serif;
-      font-weight: 700;
-      font-size: clamp(38px, 6vw, 72px);
-      line-height: 1.05;
-      margin-bottom: 20px;
-    }
-    .design-1 .hero .tagline {
-      font-size: 18px;
-      color: #5a5247;
-      max-width: 520px;
-    }
-    .design-1 .hero .stamp {
-      border: 1px solid #b9b0a3;
-      padding: 10px 16px;
-      border-radius: 999px;
-      font-size: 12px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      display: inline-block;
-      margin-bottom: 18px;
-      color: #5a5247;
-    }
-    .design-1 .hero-aside {
-      border-left: 1px solid #d6cfc5;
-      padding-left: 28px;
-      font-size: 16px;
-      color: #4a4339;
-    }
-    .design-1 .mission {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      padding: 40px 0;
-      border-top: 1px solid #ded7cd;
-      border-bottom: 1px solid #ded7cd;
-    }
-    .design-1 .dropcap {
-      font-size: 44px;
-      font-family: "Playfair Display", serif;
-      float: left;
-      line-height: 0.8;
-      margin-right: 12px;
-      color: #786b5a;
-    }
-    .design-1 .founder-card {
-      border: 1px solid #ded7cd;
-      border-radius: 16px;
-      padding: 20px;
-      text-align: center;
-      background: #fff;
-      box-shadow: 0 12px 24px rgba(0,0,0,0.06);
-    }
-    .design-1 .cta {
-      background: #fff;
-      border: 1px solid #e0d9cf;
-      box-shadow: 0 16px 40px rgba(0,0,0,0.08);
-    }
-    .design-1 .cta button {
-      background: #1c1a17;
-      color: #fff;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 999px;
-      font-size: 14px;
-      cursor: pointer;
-    }
-
-    /* =====================
-       2. Bold Geometric
-    ======================*/
-    body.theme-2 { background: #0b0f16; color: #f1f4ff; }
-    .design-2 { font-family: "Space Grotesk", sans-serif; }
-    .design-2 .hero {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 30px;
-      padding: 80px 0 30px;
-      align-items: center;
-      position: relative;
-    }
-    .design-2 .hero::before,
-    .design-2 .hero::after {
-      content: "";
-      position: absolute;
-      border-radius: 30px;
-      z-index: -1;
-    }
-    .design-2 .hero::before {
-      width: 220px; height: 220px;
-      background: #ff4d6d;
-      top: -40px; left: -20px;
-      transform: rotate(12deg);
-    }
-    .design-2 .hero::after {
-      width: 300px; height: 180px;
-      background: #5eead4;
-      bottom: -40px; right: 30px;
-      transform: rotate(-8deg);
-    }
-    .design-2 h1 {
-      font-size: clamp(40px, 7vw, 76px);
-      line-height: 0.98;
-      margin: 0 0 20px;
-    }
-    .design-2 .tagline {
-      font-size: 18px;
-      color: rgba(241,244,255,0.7);
-      max-width: 520px;
-    }
-    .design-2 .hero-panel {
-      background: #121726;
-      border: 2px solid #1f2b46;
-      border-radius: 24px;
-      padding: 24px;
-      box-shadow: var(--shadow-lg);
-    }
-    .design-2 .mission {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-top: 40px;
-    }
-    .design-2 .mission .tile {
-      background: #121726;
-      padding: 18px;
-      border-radius: 16px;
-      border: 1px solid #202c45;
-    }
-    .design-2 .founder-card {
-      background: #121726;
-      border-radius: 16px;
-      padding: 20px;
-      text-align: center;
-      border: 1px solid #202c45;
-    }
-    .design-2 .cta {
-      background: linear-gradient(135deg, #ff4d6d, #5eead4);
-      color: #0b0f16;
-      font-weight: 600;
-    }
-    .design-2 .cta button {
-      background: #0b0f16;
-      color: #fff;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 12px;
-      cursor: pointer;
-    }
-
-    /* =====================
-       3. Glassmorphism
-    ======================*/
-    body.theme-3 { background: radial-gradient(1200px 600px at 20% 10%, #9fd3ff, transparent 60%),
-                   radial-gradient(900px 500px at 90% 20%, #b6ffd5, transparent 55%),
-                   #0f172a; color: #e6f0ff; }
-    .design-3 { font-family: "Manrope", sans-serif; }
-    .design-3 .hero {
-      padding: 80px 0 40px;
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 30px;
-      align-items: center;
-    }
-    .design-3 h1 {
-      font-size: clamp(36px, 6vw, 68px);
-      margin-bottom: 18px;
-    }
-    .design-3 .glass {
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 22px;
-      padding: 22px;
-      backdrop-filter: blur(18px);
-      box-shadow: 0 18px 50px rgba(10,15,35,0.4);
-    }
-    .design-3 .stat-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-top: 24px;
-    }
-    .design-3 .stat {
-      text-align: center;
-      padding: 18px;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.16);
-    }
-    .design-3 .founder-card {
-      border-radius: 18px;
-      padding: 20px;
-      text-align: center;
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.2);
-      backdrop-filter: blur(12px);
-    }
-    .design-3 .cta {
-      background: rgba(255,255,255,0.14);
-      border: 1px solid rgba(255,255,255,0.2);
-      backdrop-filter: blur(16px);
-    }
-    .design-3 .cta button {
-      background: #e6f0ff;
-      color: #0f172a;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 999px;
-      cursor: pointer;
-      font-weight: 600;
-    }
-
-    /* =====================
-       4. Terminal / Hacker
-    ======================*/
-    body.theme-4 { background: #060b08; color: #d3f9d8; }
-    .design-4 { font-family: "JetBrains Mono", monospace; }
-    .design-4 .terminal {
-      border: 1px solid rgba(116,255,184,0.3);
-      border-radius: 18px;
-      padding: 24px;
-      background: rgba(6,11,8,0.9);
-      box-shadow: 0 16px 50px rgba(0,0,0,0.6);
-    }
-    .design-4 .hero {
-      padding: 70px 0 40px;
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 26px;
-      align-items: center;
-    }
-    .design-4 .prompt {
-      color: #7dffb2;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      font-size: 12px;
-    }
-    .design-4 h1 {
-      font-size: clamp(30px, 5vw, 58px);
-      margin: 10px 0 16px;
-    }
-    .design-4 .typing {
-      border-right: 2px solid #7dffb2;
-      white-space: nowrap;
-      overflow: hidden;
-      display: inline-block;
-      animation: caret 900ms steps(2, end) infinite;
-      color: #7dffb2;
-    }
-    @keyframes caret { 50% { border-color: transparent; } }
-    .design-4 .grid-panels {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-top: 24px;
-    }
-    .design-4 .panel {
-      border: 1px solid rgba(255,199,92,0.25);
-      border-radius: 14px;
-      padding: 16px;
-      color: #ffd88f;
-      background: rgba(255,199,92,0.05);
-    }
-    .design-4 .founder-card {
-      border: 1px solid rgba(116,255,184,0.2);
-      border-radius: 16px;
-      padding: 18px;
-      text-align: center;
-      background: rgba(116,255,184,0.04);
-    }
-    .design-4 .cta {
-      background: rgba(116,255,184,0.08);
-      border: 1px solid rgba(116,255,184,0.25);
-    }
-    .design-4 .cta button {
-      background: #7dffb2;
-      color: #060b08;
-      border: none;
-      padding: 12px 18px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 600;
-    }
-
-    /* =====================
-       5. Premium / Luxury
-    ======================*/
-    body.theme-5 { background: #0a0a0a; color: #f8f2e6; }
-    .design-5 { font-family: "Playfair Display", serif; }
-    .design-5 .hero {
-      padding: 90px 0 50px;
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 30px;
-      align-items: center;
-    }
-    .design-5 h1 {
-      font-size: clamp(40px, 7vw, 84px);
-      margin: 0 0 22px;
-      color: #f8f2e6;
-    }
-    .design-5 .tagline {
-      font-size: 18px;
-      color: #d4c6a7;
-      max-width: 520px;
-    }
-    .design-5 .gold-card {
-      border: 1px solid rgba(221,185,120,0.4);
-      border-radius: 20px;
-      padding: 24px;
-      background: linear-gradient(145deg, rgba(221,185,120,0.15), rgba(255,255,255,0.04));
-      box-shadow: var(--shadow-md);
-    }
-    .design-5 .divider {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(221,185,120,0.7), transparent);
-      margin: 30px 0;
-    }
-    .design-5 .founder-card {
-      border: 1px solid rgba(221,185,120,0.3);
-      border-radius: 16px;
-      padding: 18px;
-      text-align: center;
-      background: rgba(255,255,255,0.03);
-    }
-    .design-5 .cta {
-      background: linear-gradient(135deg, rgba(221,185,120,0.35), rgba(255,255,255,0.04));
-      border: 1px solid rgba(221,185,120,0.4);
-    }
-    .design-5 .cta button {
-      background: #ddb978;
-      color: #0a0a0a;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 999px;
-      cursor: pointer;
-      font-weight: 600;
-    }
-
-    @media (max-width: 960px) {
-      .design-1 .hero,
-      .design-2 .hero,
-      .design-3 .hero,
-      .design-4 .hero,
-      .design-5 .hero { grid-template-columns: 1fr; }
-      .design-1 .mission { grid-template-columns: 1fr; }
-      .design-2 .mission { grid-template-columns: 1fr; }
-      .design-3 .stat-grid { grid-template-columns: 1fr; }
-      .design-4 .grid-panels { grid-template-columns: 1fr; }
-    }
-  </style>
+/* ═══════════════════════════════════════
+   DESIGN 5 — "Black & Gold"
+   Luxury, editorial, high contrast
+═══════════════════════════════════════ */
+.d5{background:#08080a;color:#f0ebe0;font-family:'DM Sans',sans-serif}
+.d5 .hero5{
+  padding:160px 0 100px;text-align:center;position:relative;
+}
+.d5 .hero5::before{
+  content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(212,175,116,.12),transparent 70%);
+  pointer-events:none;
+}
+.d5 .hero5 .inner{position:relative;z-index:1}
+.d5 .hero5 .overline{
+  font-size:12px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;
+  color:#d4af74;margin-bottom:32px;
+}
+.d5 .hero5 h1{
+  font-family:'Fraunces',serif;font-weight:300;font-style:italic;
+  font-size:clamp(40px,7vw,86px);line-height:1.05;margin-bottom:24px;
+  color:#f0ebe0;
+}
+.d5 .hero5 h1 em{font-style:normal;color:#d4af74}
+.d5 .hero5 p{font-size:18px;color:rgba(240,235,224,.5);max-width:500px;margin:0 auto;line-height:1.7}
+.d5 .gold-line{height:1px;background:linear-gradient(90deg,transparent,#d4af74,transparent);margin:0 auto;width:200px}
+.d5 h2.sec-title{
+  font-family:'Fraunces',serif;font-weight:300;font-size:32px;
+  margin-bottom:40px;text-align:center;
+}
+.d5 .f-card5{
+  border:1px solid rgba(212,175,116,.2);border-radius:16px;
+  padding:40px 20px;text-align:center;
+  background:rgba(212,175,116,.03);transition:all .3s;
+}
+.d5 .f-card5:hover{border-color:rgba(212,175,116,.5);background:rgba(212,175,116,.06)}
+.d5 .f-card5 .avatar{
+  width:60px;height:60px;border-radius:50%;margin:0 auto 16px;
+  border:1px solid rgba(212,175,116,.35);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Fraunces',serif;font-size:24px;color:#d4af74;font-weight:500;
+}
+.d5 .f-card5 .name{font-size:17px;font-weight:600;margin-bottom:4px;letter-spacing:.04em}
+.d5 .f-card5 .role{font-size:13px;color:rgba(240,235,224,.4);letter-spacing:.08em;text-transform:uppercase}
+.d5 .about5{
+  display:grid;grid-template-columns:1fr 1fr;gap:48px;
+  max-width:900px;margin:0 auto;
+}
+.d5 .about5 p{font-size:16px;line-height:1.8;color:rgba(240,235,224,.55)}
+.d5 .about5 .quote{
+  font-family:'Fraunces',serif;font-size:22px;font-style:italic;
+  color:#d4af74;line-height:1.6;
+}
+.d5 .cta5{text-align:center;padding:80px 0 120px}
+.d5 .cta5 a.btn{
+  display:inline-block;padding:16px 40px;border-radius:999px;
+  border:1px solid #d4af74;color:#d4af74;font-size:14px;
+  font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  text-decoration:none;transition:all .25s;
+}
+.d5 .cta5 a.btn:hover{background:#d4af74;color:#08080a}
+@media(max-width:800px){.d5 .about5{grid-template-columns:1fr}}
+</style>
 </head>
-<body class="theme-1">
-  <div class="page">
-    <!-- Design 1: Minimal Editorial -->
-    <section class="design design-1 active" data-theme="theme-1">
-      <div class="container">
-        <div class="hero">
-          <div>
-            <span class="stamp">Impact • Deeptech • Collective</span>
-            <h1>Impact Deeptech Collective</h1>
-            <p class="tagline">
-              Four founders building science-backed companies that move society forward — with rigor, grace, and accountability.
-            </p>
-          </div>
-          <div class="hero-aside">
-            <p><span class="dropcap">W</span>e are a small, invitation-only collective of builders committed to measurable impact in climate, energy, agriculture, and health. We trade insights, talent, and capital to accelerate responsible innovation.</p>
-            <p>Founded by Kenny, Lindsey, Michelle, and Pete — each leading a mission-first deeptech company.</p>
-          </div>
-        </div>
+<body>
 
-        <div class="mission">
-          <div>
-            <h2 class="section-title">Mission</h2>
-            <p>We champion deep technology that scales with integrity, valuing long-term outcomes over short-term noise. Our collaboration is designed to deepen conviction, not dilute it.</p>
-          </div>
-          <div>
-            <h2 class="section-title">Focus</h2>
-            <p>Impact measurement, ethical innovation, and founder collaboration. We look for systems-level solutions and invite only those who operate with uncommon rigor.</p>
-          </div>
-        </div>
+<!-- ━━━━ DESIGN 1: Warm Minimal ━━━━ -->
+<div class="design d1 active" id="d1">
+  <div class="wrap">
+    <div class="hero1">
+      <div class="overline">Impact · Deeptech · Collective</div>
+      <h1>Four founders building what matters.</h1>
+      <p class="sub">We're a small collective of deeptech founders aligned around a shared mission — build durable, science-backed companies that move society forward.</p>
+    </div>
 
-        <div>
-          <h2 class="section-title">Founders</h2>
-          <div class="founder-grid">
-            <div class="founder-card">Kenny</div>
-            <div class="founder-card">Lindsey</div>
-            <div class="founder-card">Michelle</div>
-            <div class="founder-card">Pete</div>
-          </div>
-        </div>
+    <div class="divider"></div>
 
-        <div style="margin-top: 40px;">
-          <div class="cta">
-            <div>
-              <h3>Connect with the collective</h3>
-              <p>Exploring aligned partnerships or shared research? We’re open to thoughtful collaboration.</p>
-            </div>
-            <button>Request an introduction</button>
-          </div>
+    <div class="sec about1">
+      <div>
+        <h2>Our Mission</h2>
+        <p>We champion deep technology that scales with integrity. Climate, energy, agriculture, human well-being — we look for systems-level solutions and invite only those who operate with uncommon rigor.</p>
+      </div>
+      <div>
+        <h2>How We Work</h2>
+        <p>We trade insights, share talent networks, and invest in each other's success. Small by design, built for trust, candor, and compounding impact over years — not quarters.</p>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="founders-row">
+        <div class="f-card1">
+          <div class="avatar">K</div>
+          <div class="name">Kenny</div>
+          <div class="role">Founder</div>
+        </div>
+        <div class="f-card1">
+          <div class="avatar">L</div>
+          <div class="name">Lindsey</div>
+          <div class="role">Founder</div>
+        </div>
+        <div class="f-card1">
+          <div class="avatar">M</div>
+          <div class="name">Michelle</div>
+          <div class="role">Founder</div>
+        </div>
+        <div class="f-card1">
+          <div class="avatar">P</div>
+          <div class="name">Pete</div>
+          <div class="role">Founder</div>
         </div>
       </div>
-    </section>
+    </div>
 
-    <!-- Design 2: Bold Geometric -->
-    <section class="design design-2" data-theme="theme-2">
-      <div class="container">
-        <div class="hero">
-          <div>
-            <div style="font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: #5eead4;">Impact x Deeptech</div>
-            <h1>Collective power for breakthrough impact.</h1>
-            <p class="tagline">A founder coalition transforming frontier science into real-world systems change.</p>
-          </div>
-          <div class="hero-panel">
-            <strong>Why we gather</strong>
-            <p style="color: rgba(241,244,255,0.7); margin-top: 10px;">We build asymmetric solutions — radical enough to matter, disciplined enough to scale.</p>
-            <div class="mission">
-              <div class="tile">Systems-level climate & energy bets</div>
-              <div class="tile">Ethical AI + biotech acceleration</div>
-              <div class="tile">Capital with accountable returns</div>
-            </div>
-          </div>
+    <div class="sec">
+      <div class="values1">
+        <div class="val-card">
+          <h3>Impact with Rigor</h3>
+          <p>Quantify outcomes, validate claims, and build for real-world adoption — not pitch decks.</p>
         </div>
-
-        <div style="margin-top: 20px;">
-          <h2 class="section-title">Founders</h2>
-          <div class="founder-grid">
-            <div class="founder-card">Kenny</div>
-            <div class="founder-card">Lindsey</div>
-            <div class="founder-card">Michelle</div>
-            <div class="founder-card">Pete</div>
-          </div>
+        <div class="val-card">
+          <h3>Deeptech, Responsibly</h3>
+          <p>Advance frontier science with ethical guardrails and long-term stewardship.</p>
         </div>
-
-        <div style="margin-top: 40px;">
-          <div class="cta">
-            <div>
-              <h3>Let’s build bold solutions</h3>
-              <p>We invest in each other’s missions — and invite visionary partners to do the same.</p>
-            </div>
-            <button>Start a conversation</button>
-          </div>
+        <div class="val-card">
+          <h3>Founder Collaboration</h3>
+          <p>Share networks, cross-pollinate ideas, and invest in each other's success.</p>
         </div>
       </div>
-    </section>
+    </div>
 
-    <!-- Design 3: Glassmorphism -->
-    <section class="design design-3" data-theme="theme-3">
-      <div class="container">
-        <div class="hero">
-          <div>
-            <div style="letter-spacing: 0.2em; text-transform: uppercase; font-size: 12px; color: #d8e6ff;">Impact Deeptech Collective</div>
-            <h1>Building transparent, responsible deeptech.</h1>
-            <p class="tagline">A modern founder group aligning science, capital, and impact measurement.</p>
-            <div class="stat-grid">
-              <div class="stat">
-                <div style="font-size: 24px; font-weight: 700;">4</div>
-                <div>Founders</div>
-              </div>
-              <div class="stat">
-                <div style="font-size: 24px; font-weight: 700;">∞</div>
-                <div>Shared learnings</div>
-              </div>
-              <div class="stat">
-                <div style="font-size: 24px; font-weight: 700;">100%</div>
-                <div>Mission-aligned</div>
-              </div>
-            </div>
-          </div>
-          <div class="glass">
-            <h3 style="margin-top: 0;">Our mission</h3>
-            <p>We connect deeptech founders working on climate, energy, agriculture, and human well-being. Together, we de-risk frontier innovation and increase responsible adoption.</p>
-            <p>Our collective is small by design — built for trust, candor, and compounding impact.</p>
-          </div>
-        </div>
-
-        <div>
-          <h2 class="section-title">Founders</h2>
-          <div class="founder-grid">
-            <div class="founder-card">Kenny</div>
-            <div class="founder-card">Lindsey</div>
-            <div class="founder-card">Michelle</div>
-            <div class="founder-card">Pete</div>
-          </div>
-        </div>
-
-        <div style="margin-top: 40px;">
-          <div class="cta">
-            <div>
-              <h3>Partner with the collective</h3>
-              <p>We welcome collaboration with aligned operators, funders, and research partners.</p>
-            </div>
-            <button>Reach out</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Design 4: Terminal / Hacker -->
-    <section class="design design-4" data-theme="theme-4">
-      <div class="container">
-        <div class="hero">
-          <div class="terminal">
-            <div class="prompt">$ impact-deeptech --init</div>
-            <h1>We build the future that matters.</h1>
-            <div style="margin-bottom: 12px;">Status: <span class="typing" id="type-target" data-text="coordinating breakthroughs for real-world impact"></span></div>
-            <p>Four founders. One mission. High-integrity deeptech that reshapes climate, energy, agriculture, and health.</p>
-          </div>
-          <div class="terminal">
-            <div class="prompt">$ mission --summary</div>
-            <p>We share roadmaps, de-risk R&D, and accelerate adoption with principled partnerships.</p>
-            <div class="grid-panels">
-              <div class="panel">Impact metrics + validation</div>
-              <div class="panel">Long-horizon founder capital</div>
-              <div class="panel">Ethics-first deployment</div>
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <h2 class="section-title">Founders</h2>
-          <div class="founder-grid">
-            <div class="founder-card">Kenny</div>
-            <div class="founder-card">Lindsey</div>
-            <div class="founder-card">Michelle</div>
-            <div class="founder-card">Pete</div>
-          </div>
-        </div>
-
-        <div style="margin-top: 40px;">
-          <div class="cta">
-            <div>
-              <h3>Signal a collaboration</h3>
-              <p>We respond to builders with ambitious, measurable impact plans.</p>
-            </div>
-            <button>Initialize contact</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Design 5: Premium / Luxury -->
-    <section class="design design-5" data-theme="theme-5">
-      <div class="container">
-        <div class="hero">
-          <div>
-            <div style="letter-spacing: 0.3em; text-transform: uppercase; font-size: 12px; color: #ddb978;">Impact Deeptech Collective</div>
-            <h1>Premium capital. Purposeful science.</h1>
-            <p class="tagline">A private collective of founders deploying elite deeptech to elevate humanity’s most urgent systems.</p>
-            <div class="divider"></div>
-            <p style="color: #c9b48a;">We prioritize integrity, endurance, and transformational outcomes. Invitations are limited.</p>
-          </div>
-          <div class="gold-card">
-            <h3 style="margin-top: 0;">Our focus</h3>
-            <p>We align mission, capital, and execution to unlock responsible innovation at scale.</p>
-            <p>From climate to human well-being, we build for lasting advantage and real-world adoption.</p>
-          </div>
-        </div>
-
-        <div>
-          <h2 class="section-title">Founders</h2>
-          <div class="founder-grid">
-            <div class="founder-card">Kenny</div>
-            <div class="founder-card">Lindsey</div>
-            <div class="founder-card">Michelle</div>
-            <div class="founder-card">Pete</div>
-          </div>
-        </div>
-
-        <div style="margin-top: 40px;">
-          <div class="cta">
-            <div>
-              <h3>Request private access</h3>
-              <p>We curate a small circle of aligned partners. Reach out for an introduction.</p>
-            </div>
-            <button>Apply for access</button>
-          </div>
-        </div>
-      </div>
-    </section>
+    <div class="cta1">
+      <h2>Interested in connecting?</h2>
+      <p>We welcome thoughtful collaboration with aligned operators and partners.</p>
+      <a href="mailto:hello@example.com" class="btn">Get in touch</a>
+    </div>
   </div>
+</div>
 
-  <div class="switcher" aria-label="Design switcher">
-    <button id="prevBtn">Prev</button>
-    <div class="dots" id="dots"></div>
-    <button id="nextBtn">Next</button>
+<!-- ━━━━ DESIGN 2: Midnight Gradient ━━━━ -->
+<div class="design d2" id="d2">
+  <div class="wrap">
+    <div class="hero2">
+      <div class="inner">
+        <div class="badge">Impact × Deeptech</div>
+        <h1>Collective power for breakthrough impact.</h1>
+        <p>A founder coalition transforming frontier science into real-world systems change — across climate, energy, agriculture, and health.</p>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="stats2">
+        <div class="stat2"><div class="num">4</div><div class="label">Founders</div></div>
+        <div class="stat2"><div class="num">4</div><div class="label">Companies</div></div>
+        <div class="stat2"><div class="num">100%</div><div class="label">Mission-aligned</div></div>
+        <div class="stat2"><div class="num">∞</div><div class="label">Shared learnings</div></div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <h2 class="sec-title">Founders</h2>
+      <div class="founders-row">
+        <div class="f-card2">
+          <div class="avatar">K</div>
+          <div class="name">Kenny</div>
+          <div class="role">Founder</div>
+        </div>
+        <div class="f-card2">
+          <div class="avatar">L</div>
+          <div class="name">Lindsey</div>
+          <div class="role">Founder</div>
+        </div>
+        <div class="f-card2">
+          <div class="avatar">M</div>
+          <div class="name">Michelle</div>
+          <div class="role">Founder</div>
+        </div>
+        <div class="f-card2">
+          <div class="avatar">P</div>
+          <div class="name">Pete</div>
+          <div class="role">Founder</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="mission2">
+        <div class="m-card">
+          <h3>🔬 Why Deeptech</h3>
+          <p>We build asymmetric solutions — radical enough to matter, disciplined enough to scale. No hype cycles, just hard science meeting real problems.</p>
+        </div>
+        <div class="m-card">
+          <h3>🌍 Why Impact</h3>
+          <p>Technology without purpose is just complexity. We measure success by systems changed, lives improved, and ecosystems restored.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta2">
+      <a href="mailto:hello@example.com" class="btn">Start a conversation →</a>
+    </div>
   </div>
+</div>
 
-  <script>
-    const designs = Array.from(document.querySelectorAll('.design'));
-    const body = document.body;
-    const dots = document.getElementById('dots');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    let current = 0;
+<!-- ━━━━ DESIGN 3: Glass & Light ━━━━ -->
+<div class="design d3" id="d3">
+  <div class="wrap">
+    <div class="hero3">
+      <div class="chip">Impact Deeptech Collective</div>
+      <h1>Transparent science. Responsible scale.</h1>
+      <p>A modern founder group aligning breakthrough technology with measurable human impact.</p>
+    </div>
 
-    designs.forEach((design, idx) => {
-      const dot = document.createElement('button');
-      dot.className = 'dot';
-      dot.textContent = idx + 1;
-      dot.addEventListener('click', () => activate(idx));
-      dots.appendChild(dot);
-    });
+    <div class="sec" style="text-align:center">
+      <div class="glass" style="max-width:700px;margin:0 auto">
+        <div class="glass-grid">
+          <div class="glass-stat"><div class="big">4</div><div class="lbl">Founders</div></div>
+          <div class="glass-stat"><div class="big">4</div><div class="lbl">Deeptech Cos</div></div>
+          <div class="glass-stat"><div class="big">1</div><div class="lbl">Shared Mission</div></div>
+        </div>
+      </div>
+    </div>
 
-    function activate(index) {
-      designs[current].classList.remove('active');
-      dots.children[current].classList.remove('active');
-      current = (index + designs.length) % designs.length;
-      designs[current].classList.add('active');
-      dots.children[current].classList.add('active');
-      body.className = designs[current].dataset.theme;
-      if (body.classList.contains('theme-4')) {
-        startTyping();
-      }
-    }
+    <div class="sec">
+      <h2 class="sec-title">Founders</h2>
+      <div class="founders-row">
+        <div class="f-card3">
+          <div class="avatar">K</div>
+          <div class="name">Kenny</div>
+          <div class="role">Founder</div>
+        </div>
+        <div class="f-card3">
+          <div class="avatar">L</div>
+          <div class="name">Lindsey</div>
+          <div class="role">Founder</div>
+        </div>
+        <div class="f-card3">
+          <div class="avatar">M</div>
+          <div class="name">Michelle</div>
+          <div class="role">Founder</div>
+        </div>
+        <div class="f-card3">
+          <div class="avatar">P</div>
+          <div class="name">Pete</div>
+          <div class="role">Founder</div>
+        </div>
+      </div>
+    </div>
 
-    prevBtn.addEventListener('click', () => activate(current - 1));
-    nextBtn.addEventListener('click', () => activate(current + 1));
+    <div class="sec">
+      <h2 class="sec-title">What We Stand For</h2>
+      <div class="pillars">
+        <div class="pillar">
+          <div class="icon">⚡</div>
+          <h3>Impact with Rigor</h3>
+          <p>Quantify outcomes, validate claims, and build for real-world adoption.</p>
+        </div>
+        <div class="pillar">
+          <div class="icon">🧬</div>
+          <h3>Deeptech, Responsibly</h3>
+          <p>Advance frontier science with ethical guardrails and long-term stewardship.</p>
+        </div>
+        <div class="pillar">
+          <div class="icon">🤝</div>
+          <h3>Founder First</h3>
+          <p>Share networks, cross-pollinate ideas, and invest in each other's success.</p>
+        </div>
+      </div>
+    </div>
 
-    function startTyping() {
-      const el = document.getElementById('type-target');
-      if (!el || el.dataset.typed === 'true') return;
-      const text = el.dataset.text;
-      el.textContent = '';
-      let i = 0;
-      const timer = setInterval(() => {
-        el.textContent += text[i] || '';
-        i++;
-        if (i > text.length) {
-          clearInterval(timer);
-          el.dataset.typed = 'true';
-        }
-      }, 40);
-    }
+    <div class="cta3">
+      <a href="mailto:hello@example.com" class="btn">Partner with us →</a>
+    </div>
+  </div>
+</div>
 
-    activate(0);
-  </script>
+<!-- ━━━━ DESIGN 4: Terminal ━━━━ -->
+<div class="design d4" id="d4">
+  <div class="scanlines"></div>
+  <div class="wrap">
+    <div class="hero4">
+      <div class="term-window">
+        <div class="term-bar">
+          <span class="term-dot r"></span><span class="term-dot y"></span><span class="term-dot g"></span>
+          <span class="term-title">impact-deeptech-collective — bash</span>
+        </div>
+        <div class="term-body">
+          <div class="prompt">$ ./collective --init</div>
+          <h1>We build the future<br>that matters.<span class="cursor"></span></h1>
+          <div class="output">
+            Four founders. One mission. High-integrity deeptech reshaping climate, energy, agriculture, and health. Small by design. Built for trust.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <h2 class="sec-title">$ ls ./founders/</h2>
+      <div class="founders-row">
+        <div class="f-card4">
+          <div class="avatar">K</div>
+          <div class="name">Kenny</div>
+          <div class="role">./founders/kenny</div>
+        </div>
+        <div class="f-card4">
+          <div class="avatar">L</div>
+          <div class="name">Lindsey</div>
+          <div class="role">./founders/lindsey</div>
+        </div>
+        <div class="f-card4">
+          <div class="avatar">M</div>
+          <div class="name">Michelle</div>
+          <div class="role">./founders/michelle</div>
+        </div>
+        <div class="f-card4">
+          <div class="avatar">P</div>
+          <div class="name">Pete</div>
+          <div class="role">./founders/pete</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <h2 class="sec-title">$ cat ./mission.log</h2>
+      <div class="log-section">
+        <div class="log-entry"><span class="tag">[CORE]</span><span class="msg">Impact measurement + validation at every stage</span></div>
+        <div class="log-entry"><span class="tag">[CORE]</span><span class="msg">Long-horizon founder capital — patient, accountable</span></div>
+        <div class="log-entry"><span class="tag">[CORE]</span><span class="msg">Ethics-first deployment of frontier technology</span></div>
+        <div class="log-entry"><span class="tag">[NET ]</span><span class="msg">Cross-pollinate talent, insights, and deal flow</span></div>
+        <div class="log-entry"><span class="tag">[NET ]</span><span class="msg">Shared conviction > shared capital</span></div>
+      </div>
+    </div>
+
+    <div class="cta4">
+      <a href="mailto:hello@example.com" class="btn">$ ./contact --init →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ━━━━ DESIGN 5: Black & Gold ━━━━ -->
+<div class="design d5" id="d5">
+  <div class="wrap">
+    <div class="hero5">
+      <div class="inner">
+        <div class="overline">Impact Deeptech Collective</div>
+        <h1>Purpose meets <em>precision.</em></h1>
+        <p>A private collective of founders deploying elite deeptech to elevate humanity's most urgent systems.</p>
+      </div>
+    </div>
+
+    <div class="gold-line"></div>
+
+    <div class="sec">
+      <h2 class="sec-title">The Founders</h2>
+      <div class="founders-row">
+        <div class="f-card5">
+          <div class="avatar">K</div>
+          <div class="name">Kenny</div>
+          <div class="role">Founder</div>
+        </div>
+        <div class="f-card5">
+          <div class="avatar">L</div>
+          <div class="name">Lindsey</div>
+          <div class="role">Founder</div>
+        </div>
+        <div class="f-card5">
+          <div class="avatar">M</div>
+          <div class="name">Michelle</div>
+          <div class="role">Founder</div>
+        </div>
+        <div class="f-card5">
+          <div class="avatar">P</div>
+          <div class="name">Pete</div>
+          <div class="role">Founder</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gold-line"></div>
+
+    <div class="sec">
+      <div class="about5">
+        <div class="quote">"The most important technologies of this decade will be both high-leverage and high-integrity."</div>
+        <div>
+          <p>We are four founders from impact-driven deeptech companies, aligned around building durable solutions in climate, energy, agriculture, and human well-being.</p>
+          <p style="margin-top:16px">We collaborate across ideas, talent, and capital to accelerate responsible innovation. Invitations are limited. Trust is everything.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta5">
+      <a href="mailto:hello@example.com" class="btn">Request Introduction</a>
+    </div>
+  </div>
+</div>
+
+<!-- ━━━━ Theme Switcher ━━━━ -->
+<nav class="theme-switcher">
+  <button class="sw-arrow" id="sw-prev">‹</button>
+  <span class="sw-label">Design</span>
+  <button class="sw-dot active" data-i="0">1</button>
+  <button class="sw-dot" data-i="1">2</button>
+  <button class="sw-dot" data-i="2">3</button>
+  <button class="sw-dot" data-i="3">4</button>
+  <button class="sw-dot" data-i="4">5</button>
+  <button class="sw-arrow" id="sw-next">›</button>
+</nav>
+
+<script>
+(function(){
+  const designs = document.querySelectorAll('.design');
+  const dots = document.querySelectorAll('.sw-dot');
+  let cur = 0;
+
+  function go(i){
+    i = ((i % designs.length) + designs.length) % designs.length;
+    designs[cur].classList.remove('active');
+    dots[cur].classList.remove('active');
+    cur = i;
+    designs[cur].classList.add('active');
+    dots[cur].classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  dots.forEach(d => d.addEventListener('click', () => go(+d.dataset.i)));
+  document.getElementById('sw-prev').addEventListener('click', () => go(cur - 1));
+  document.getElementById('sw-next').addEventListener('click', () => go(cur + 1));
+
+  // Keyboard nav
+  document.addEventListener('keydown', e => {
+    if(e.key === 'ArrowRight') go(cur + 1);
+    if(e.key === 'ArrowLeft') go(cur - 1);
+  });
+})();
+</script>
 </body>
 </html>
